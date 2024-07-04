@@ -8,7 +8,7 @@ public class PlatformScroller : MonoBehaviour
     void Update()
     {
         transform.Translate(Vector3.left * scrollSpeed * Time.deltaTime);
-        if (transform.position.x < -20) // 필요에 따라 조정
+        if (transform.position.x < -13) // 필요에 따라 조정
         {
             Destroy(gameObject);
         }
