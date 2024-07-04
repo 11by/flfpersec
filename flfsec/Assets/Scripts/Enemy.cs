@@ -1,9 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class PlatformScroller : MonoBehaviour
+
+public class Enemy : MonoBehaviour
 {
-    public float scrollSpeed;
+    public float scrollSpeed = 2.0f;
+
+    void Start()
+    {
+        PlatformScroller platformScroller = GetComponent<PlatformScroller>();
+        if (platformScroller != null)
+        {
+            scrollSpeed = platformScroller.scrollSpeed;
+        }
+    }
 
     void Update()
     {

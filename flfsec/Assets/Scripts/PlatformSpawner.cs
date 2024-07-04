@@ -5,22 +5,13 @@ using UnityEngine;
 public class PlatformSpawner : MonoBehaviour
 {
     public GameObject platformPrefab;
-    public float spawnInterval = 1.0f;
     public float scrollSpeed = 2.0f;
-    private float timer = 0;
 
-    void Update()
+    public void SpawnPlatform(Vector3 position)
     {
-        timer += Time.deltaTime;
-        if (timer >= spawnInterval)
-        {
-            SpawnPlatform();
-            timer = 0;
-        }
-    }
-    void SpawnPlatform()
-    {
-        GameObject platform = Instantiate(platformPrefab, new Vector3(10, -2, 0), Quaternion.identity);
+        GameObject platform = Instantiate(platformPrefab, position, Quaternion.identity);
         platform.AddComponent<PlatformScroller>().scrollSpeed = scrollSpeed;
+        float platformLength = 1f; // 발판의 길이 설정 (원하는 크기로 조정)
+        platform.transform.localScale = new Vector3(platformLength, 1, 1);
     }
 }
