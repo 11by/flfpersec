@@ -1,20 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using FMODUnity;
 
-public class PlatformManager : MonoBehaviour
+public class EnemyManager : MonoBehaviour
 {
-    public PlatformSpawner platformSpawner;
+    public EnemySpawner enemySpawner;
     public float scrollSpeed = 2.0f;
     public float beatsPerMinute = 120.0f; // BPM
     public float durationInSeconds = 30.0f; // 게임이 진행될 시간(초)
-    public bool[] platformPattern;
-    public StudioEventEmitter musicEmitter;
+    public bool[] enemyPattern; // 적이 나타날 박자 패턴
+    public float[] enemyYPositions;
 
     private float beatInterval;
     private int numberOfBeats;
-    private int platformCount = 0;
 
     void Start()
     {
@@ -23,18 +21,16 @@ public class PlatformManager : MonoBehaviour
 
         for (int i = 0; i < numberOfBeats; i++)
         {
-            if (platformPattern[i])
+            if (enemyPattern[i])
             {
-                Vector3 position = new Vector3(i * beatInterval * scrollSpeed, -4, 0);
-                platformSpawner.SpawnPlatform(position);
-
-                platformCount++;
-
-                if (platformCount == 9)
-                {
-                    musicEmitter.Play();
-                }
+                Vector3 position = new Vector3(i * beatInterval * scrollSpeed, -2 + enemyYPositions[i], 0);
+                enemySpawner.SpawnEnemy(position);
             }
         }
+    }
+
+    void SpawnEnemy(Vector2 position)
+    {
+        Instantiate(enemySpawner, position, Quaternion.identity);
     }
 }

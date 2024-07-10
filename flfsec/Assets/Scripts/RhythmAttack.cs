@@ -4,21 +4,13 @@ using UnityEngine;
 
 public class RhythmAttack : MonoBehaviour
 {
-    public float attackInterval = 0.5f;
-    private float attackTimer = 0;
     public float attackRange = 1f;
 
     void Update()
     {
-        attackTimer += Time.deltaTime;
-
-        if (attackTimer >= attackInterval)
+        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown(KeyCode.K) || Input.GetKeyDown(KeyCode.L))
         {
-            if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown(KeyCode.K) || Input.GetKeyDown(KeyCode.L))
-            {
-                Attack();
-                attackTimer = 0;
-            }
+            Attack();
         }
     }
 
