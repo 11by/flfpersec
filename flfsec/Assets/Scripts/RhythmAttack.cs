@@ -5,6 +5,8 @@ using UnityEngine;
 public class RhythmAttack : MonoBehaviour
 {
     public float attackRange = 1f;
+    public LayerMask enemyLayer;
+    public Animator animator; // Animator 추가
 
     void Update()
     {
@@ -16,6 +18,9 @@ public class RhythmAttack : MonoBehaviour
 
     void Attack()
     {
+        // 애니메이션 트리거 설정
+        animator.SetTrigger("AttackTrigger");
+
         // 공격 범위 내의 적을 감지하고 제거
         RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, Vector2.right, attackRange);
         foreach (RaycastHit2D hit in hits)
