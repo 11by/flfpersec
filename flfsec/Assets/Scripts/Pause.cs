@@ -10,7 +10,6 @@ public class Pause : MonoBehaviour
     private bool IsResume;
 
     public Image pauseSprite;
-
     public Animator uiAnimator;
 
     private readonly string showTrigger = "doShow";
@@ -22,6 +21,13 @@ public class Pause : MonoBehaviour
         IsPause = false;   
         IsResume = false;
         pauseSprite.enabled = false;
+
+        if (uiAnimator != null)
+        {
+            uiAnimator.updateMode = AnimatorUpdateMode.UnscaledTime;
+            uiAnimator.ResetTrigger(showTrigger);
+            uiAnimator.ResetTrigger(hideTrigger);
+        }
     }
 
     // Update is called once per frame
@@ -43,26 +49,29 @@ public class Pause : MonoBehaviour
 
     void PauseGame()
     {
-        Time.timeScale = 0;
         IsPause = true;
         IsResume= false;
-
-        pauseSprite.enabled = true;
 
         if (uiAnimator != null)
         {
             uiAnimator.SetTrigger(showTrigger);
         }
+
+        pauseSprite.enabled = true;
+        Time.timeScale = 0;
     }
 
     IEnumerator ResumeGameAfterDelay(float delay)
     {
         IsResume = true;
+
         if (uiAnimator != null)
         {
             uiAnimator.SetTrigger(hideTrigger);
         }
+
         yield return new WaitForSecondsRealtime(delay);
+
         Time.timeScale = 1;
         IsPause = false;
         IsResume = false;

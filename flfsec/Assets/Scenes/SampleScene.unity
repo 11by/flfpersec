@@ -555,7 +555,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseSprite: {fileID: 848227973}
-  uiAnimator: {fileID: 0}
+  uiAnimator: {fileID: 489557015}
 --- !u!1 &608383087
 GameObject:
   m_ObjectHideFlags: 0
@@ -640,7 +640,7 @@ MonoBehaviour:
       Data4: -709396337
     Path: event:/Music_play
   Event: 
-  PlayEvent: 1
+  PlayEvent: 11
   StopEvent: 0
   AllowFadeout: 1
   TriggerOnce: 0
