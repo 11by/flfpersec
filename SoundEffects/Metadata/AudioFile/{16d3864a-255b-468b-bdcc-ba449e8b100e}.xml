@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{16d3864a-255b-468b-bdcc-ba449e8b100e}">
+		<property name="assetPath">
+			<value>bat_swing2.mp3</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>2.0897959183673471</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{64c95b89-2bad-4999-9bee-b175b79688cc}</destination>
+		</relationship>
+	</object>
+</objects>
