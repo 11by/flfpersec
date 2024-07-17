@@ -61,6 +61,14 @@ public class Pause : MonoBehaviour
         Time.timeScale = 0;
     }
 
+    public void ResumeGame()
+    {
+        if (IsPause && !IsResume)
+        {
+            StartCoroutine(ResumeGameAfterDelay(3.0f));
+        }
+    }
+
     IEnumerator ResumeGameAfterDelay(float delay)
     {
         IsResume = true;
