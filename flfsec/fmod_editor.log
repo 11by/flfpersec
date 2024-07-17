@@ -18,3 +18,24 @@
 [ERR] RuntimeBankModel::openFile               : Failed to open file '../../../FMOD Studio/floor_land/Build/Desktop/Master.bank'
 [ERR] RuntimeBankModel::openFile               : Failed to open file '../../../FMOD Studio/floor_land/Build/Desktop/sound_effects.bank'
 [WRN] ObjectLookup::get                        : Lookup failed for EventModel: {818ca8c9-0040-43bc-b658-563b8f78b7d5}
+[ERR] RuntimeBankModel::openFile               : Failed to open file '../../../FMOD Studio/floor_land/Build/Desktop/Master.strings.bank'
+[ERR] RuntimeBankModel::openFile               : Failed to open file '../../../FMOD Studio/floor_land/Build/Desktop/Master.bank'
+[ERR] RuntimeBankModel::openFile               : Failed to open file '../../../FMOD Studio/floor_land/Build/Desktop/sound_effects.bank'
+[WRN] ObjectLookup::get                        : Lookup failed for EventModel: {818ca8c9-0040-43bc-b658-563b8f78b7d5}
+[ERR] RuntimeBankModel::openFile               : Failed to open file '../../../FMOD Studio/floor_land/Build/Desktop/Master.strings.bank'
+[ERR] RuntimeBankModel::openFile               : Failed to open file '../../../FMOD Studio/floor_land/Build/Desktop/Master.bank'
+[ERR] RuntimeBankModel::openFile               : Failed to open file '../../../FMOD Studio/floor_land/Build/Desktop/sound_effects.bank'
+[WRN] ObjectLookup::get                        : Lookup failed for EventModel: {818ca8c9-0040-43bc-b658-563b8f78b7d5}
+[ERR] RuntimeBankModel::openFile               : Failed to open file '../../../FMOD Studio/floor_land/Build/Desktop/Master.strings.bank'
+[ERR] RuntimeBankModel::openFile               : Failed to open file '../../../FMOD Studio/floor_land/Build/Desktop/Master.bank'
+[ERR] RuntimeBankModel::openFile               : Failed to open file '../../../FMOD Studio/floor_land/Build/Desktop/sound_effects.bank'
+[ERR] RuntimeBankModel::openFile               : Failed to open file '../../../FMOD Studio/floor_land/Build/Desktop/Master.strings.bank'
+[ERR] RuntimeBankModel::openFile               : Failed to open file '../../../FMOD Studio/floor_land/Build/Desktop/Master.bank'
+[ERR] RuntimeBankModel::openFile               : Failed to open file '../../../FMOD Studio/floor_land/Build/Desktop/sound_effects.bank'
+[LOG] Thread::callback                         : FMOD Studio bank load thread finished.
+[LOG] Thread::callback                         : FMOD Studio sample load thread finished.
+[LOG] LiveUpdate::release                      : 
+[LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
+[LOG] Thread::callback                         : FMOD stream thread finished.
+[LOG] Thread::callback                         : FMOD mixer thread finished.
+[LOG] SystemI::close                           : Closed.
