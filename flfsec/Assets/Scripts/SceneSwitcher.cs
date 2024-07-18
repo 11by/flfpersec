@@ -7,8 +7,20 @@ public class SceneSwitcher : MonoBehaviour
     public string sceneName;
 
     // 이 메서드를 버튼의 OnClick 이벤트에 연결합니다.
+
+    public void ReloadCurrentScene()
+    {
+        Time.timeScale = 1;
+
+        string currentSceneName = SceneManager.GetActiveScene().name;
+
+        SceneManager.LoadScene(currentSceneName);
+    }
+
     public void SwitchScene()
     {
+        Time.timeScale = 1;
+
         // 지정된 씬으로 전환합니다.
         SceneManager.LoadScene(sceneName);
     }
