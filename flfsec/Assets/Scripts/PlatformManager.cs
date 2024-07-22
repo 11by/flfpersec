@@ -54,6 +54,12 @@ public class PlatformManager : MonoBehaviour
         for (int i = platforms.Count - 1; i >= 0; i--)
         {
             GameObject platform = platforms[i];
+
+            if (platform == null)
+            {
+                platforms.RemoveAt(i);
+                continue;
+            }
             platform.transform.position += Vector3.left * scrollAmount;
 
             // 발판이 플레이어의 x좌표에서 더 멀리 떨어진 후 제거되도록 수정
