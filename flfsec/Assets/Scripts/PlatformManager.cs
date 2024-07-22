@@ -60,7 +60,6 @@ public class PlatformManager : MonoBehaviour
                 platforms.RemoveAt(i);
                 continue;
             }
-            platform.transform.position += Vector3.left * scrollAmount;
 
             // 발판이 플레이어의 x좌표에서 더 멀리 떨어진 후 제거되도록 수정
             if (platform.transform.position.x < player.position.x - 2 * platformWidth)
