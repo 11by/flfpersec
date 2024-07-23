@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public void PlayerDied()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        // 플레이어가 사망했을 때 처리할 코드 (예: 게임 종료, 리스타트, UI 업데이트 등)
+        Debug.Log("Handling player death in GameManager");
+        // 게임 종료, 리스타트 등
     }
 }

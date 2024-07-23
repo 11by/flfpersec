@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
     public LayerMask groundLayer; // 발판 레이어 마스크
     public float groundCheckDistance = 1.0f; // 발판 검사 거리
     public float fixedXPosition = -5.5f; // 플레이어의 고정된 x 좌표
+    public int lives = 3; // 플레이어의 목숨
+    public Animator animator;
 
     private Rigidbody2D rb;
     private bool isGrounded; // 발판 위에 있는지 여부 체크
@@ -34,6 +36,15 @@ public class PlayerController : MonoBehaviour
                 ApplyDownwardForce();
             }
         }
+
+        if (!isGrounded)
+        {
+            animator.SetBool("IsAirborne", true);
+        }
+        else
+        {
+            animator.SetBool("IsAirborne", false);
+        }
     }
 
     void FixedUpdate()
@@ -49,6 +60,7 @@ public class PlayerController : MonoBehaviour
     {
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         isGrounded = false; // 점프 후에는 공중에 있는 상태로 변경
+        animator.SetTrigger("Jump");
     }
 
     void ApplyDownwardForce()
@@ -74,6 +86,55 @@ public class PlayerController : MonoBehaviour
         else
         {
             isGrounded = false;
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            LoseLife();
+        }
+        else if (collision.gameObject.CompareTag("Dead"))
+        {
+            Die();
+        }
+    }
+
+    void LoseLife()
+    {
+        lives--;
+        if (lives <= 0)
+        {
+            Die();
+        }
+        else
+        {
+            // 플레이어가 적에게 맞았을 때의 로직 추가 (예: 깜빡임, 무적 시간 등)
+            Debug.Log("Player hit by enemy! Lives remaining: " + lives);
+        }
+    }
+
+    void Die()
+    {
+        // 플레이어가 사망했을 때의 로직 추가
+        Debug.Log("Player has died!");
+        // 예를 들어, 게임 오버 화면으로 전환하거나 플레이어를 리셋하는 코드를 추가할 수 있습니다.
+    }
+
+    public void CheckCollisionWithTag(string tag)
+    {
+        GameObject obj = GameObject.FindGameObjectWithTag(tag);
+        if (obj != null)
+        {
+            if (tag == "Enemy")
+            {
+                LoseLife();
+            }
+            else if (tag == "Dead")
+            {
+                Die();
+            }
         }
     }
 }
