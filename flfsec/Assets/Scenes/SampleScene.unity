@@ -1649,7 +1649,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpHeight: 2.4
-  airTime: 1
+  airTime: 1.05
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -1779,6 +1779,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   animator: {fileID: 975908911}
+  playerController: {fileID: 0}
 --- !u!95 &975908911
 Animator:
   serializedVersion: 5
