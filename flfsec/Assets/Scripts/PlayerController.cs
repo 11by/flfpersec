@@ -4,46 +4,46 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float jumpForce = 10f; // 점프 힘
-    public float downwardForce = -50f; // 공중에서 점프 시 아래로 가해지는 힘
+    public float jumpHeight = 5f; // 점프 높이
+    public float airTime = 1f; // 공중에 떠 있는 시간
     public LayerMask groundLayer; // 발판 레이어 마스크
     public float groundCheckDistance = 1.0f; // 발판 검사 거리
     public float fixedXPosition = -5.5f; // 플레이어의 고정된 x 좌표
     public int lives = 3; // 플레이어의 목숨
     public Animator animator;
+    public ParticleSystem dustParticle;
 
     private Rigidbody2D rb;
     private bool isGrounded; // 발판 위에 있는지 여부 체크
+    private bool isJumping; // 점프 중인지 여부 체크
+    private float originalGravityScale; // 원래 중력 값 저장
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        originalGravityScale = rb.gravityScale; // 시작 시 중력 값 저장
         CheckGrounded();
     }
 
     void Update()
     {
         // 점프 입력 체크
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded && !isJumping)
         {
-            if (isGrounded)
-            {
-                Jump();
-            }
-            else
-            {
-                // 공중에서 점프 키를 눌렀을 때 아래로 강한 힘을 가해 착지하도록 처리
-                ApplyDownwardForce();
-            }
+            StartCoroutine(JumpRoutine(jumpHeight));
         }
 
-        if (!isGrounded)
+        // 애니메이션 설정
+        animator.SetBool("IsAirborne", !isGrounded);
+
+        // 파티클 이펙트 제어
+        if (isGrounded && !dustParticle.isPlaying)
         {
-            animator.SetBool("IsAirborne", true);
+            dustParticle.Play();
         }
-        else
+        else if (!isGrounded && dustParticle.isPlaying)
         {
-            animator.SetBool("IsAirborne", false);
+            dustParticle.Stop();
         }
     }
 
@@ -51,21 +51,10 @@ public class PlayerController : MonoBehaviour
     {
         CheckGrounded();
 
+        // 플레이어의 x 좌표 고정
         Vector3 position = transform.position;
         position.x = fixedXPosition;
         transform.position = position;
-    }
-
-    void Jump()
-    {
-        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-        isGrounded = false; // 점프 후에는 공중에 있는 상태로 변경
-        animator.SetTrigger("Jump");
-    }
-
-    void ApplyDownwardForce()
-    {
-        rb.velocity = new Vector2(rb.velocity.x, downwardForce);
     }
 
     void CheckGrounded()
@@ -74,18 +63,44 @@ public class PlayerController : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance, groundLayer);
         if (hit.collider != null && hit.collider.CompareTag("Platform"))
         {
-            if (Mathf.Abs(hit.distance) < 0.1f)
-            {
-                isGrounded = true;
-            }
-            else
-            {
-                isGrounded = false;
-            }
+            isGrounded = true;
         }
         else
         {
             isGrounded = false;
+        }
+    }
+
+    IEnumerator JumpRoutine(float height)
+    {
+        isJumping = true;
+        isGrounded = false;
+        animator.SetTrigger("Jump");
+
+        // 점프 시작
+        rb.gravityScale = 0; // 중력 값 0으로 설정
+        Vector3 startPosition = transform.position;
+        Vector3 peakPosition = new Vector3(startPosition.x, startPosition.y + jumpHeight, startPosition.z);
+
+        // 점프 높이로 순간 이동
+        transform.position = peakPosition;
+
+        // 공중에 떠 있는 시간 동안 대기
+        yield return new WaitForSeconds(airTime);
+
+        // 땅으로 순간 이동
+        Vector3 groundPosition = new Vector3(startPosition.x, startPosition.y, startPosition.z);
+        transform.position = groundPosition;
+
+        // 중력 값 원래대로 설정
+        rb.gravityScale = originalGravityScale;
+        isJumping = false;
+        CheckGrounded();
+
+        // 착지할 때의 애니메이션 트리거
+        if (isGrounded)
+        {
+            animator.SetTrigger("Land");
         }
     }
 
@@ -110,31 +125,22 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            // 플레이어가 적에게 맞았을 때의 로직 추가 (예: 깜빡임, 무적 시간 등)
             Debug.Log("Player hit by enemy! Lives remaining: " + lives);
         }
     }
 
     void Die()
     {
-        // 플레이어가 사망했을 때의 로직 추가
         Debug.Log("Player has died!");
-        // 예를 들어, 게임 오버 화면으로 전환하거나 플레이어를 리셋하는 코드를 추가할 수 있습니다.
     }
 
-    public void CheckCollisionWithTag(string tag)
+    public void JumpUp()
     {
-        GameObject obj = GameObject.FindGameObjectWithTag(tag);
-        if (obj != null)
-        {
-            if (tag == "Enemy")
-            {
-                LoseLife();
-            }
-            else if (tag == "Dead")
-            {
-                Die();
-            }
-        }
+        StartCoroutine(JumpRoutine(jumpHeight));
+    }
+
+    public void JumpDown()
+    {
+        StartCoroutine(JumpRoutine(-jumpHeight));
     }
 }
