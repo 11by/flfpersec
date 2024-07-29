@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded; // 발판 위에 있는지 여부 체크
     private bool isJumping; // 점프 중인지 여부 체크
     private float originalGravityScale; // 원래 중력 값 저장
+    private Coroutine currentJumpRoutine; // 현재 진행 중인 점프 코루틴
 
     void Start()
     {
@@ -30,7 +31,11 @@ public class PlayerController : MonoBehaviour
         // 점프 입력 체크
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded && !isJumping)
         {
-            StartCoroutine(JumpRoutine(jumpHeight));
+            currentJumpRoutine = StartCoroutine(NormalJump(jumpHeight));
+        }
+        else if (Input.GetKeyDown(KeyCode.Space) && isJumping)
+        {
+            LandOnClosestPlatformBelow();
         }
 
         // 애니메이션 설정
@@ -80,7 +85,28 @@ public class PlayerController : MonoBehaviour
         // 점프 시작
         rb.gravityScale = 0; // 중력 값 0으로 설정
         Vector3 startPosition = transform.position;
-        Vector3 peakPosition = new Vector3(startPosition.x, startPosition.y + jumpHeight, startPosition.z);
+        Vector3 peakPosition = new Vector3(startPosition.x, startPosition.y + height, startPosition.z);
+
+        // 점프 높이로 순간 이동
+        transform.position = peakPosition;
+
+        // 공중에 떠 있는 시간 동안 대기
+        yield return new WaitForSeconds(airTime);
+
+        // 점프 루틴 종료
+        isJumping = false;
+    }
+
+    IEnumerator NormalJump(float height)
+    {
+        isJumping = true;
+        isGrounded = false;
+        animator.SetTrigger("Jump");
+
+        // 점프 시작
+        rb.gravityScale = 0; // 중력 값 0으로 설정
+        Vector3 startPosition = transform.position;
+        Vector3 peakPosition = new Vector3(startPosition.x, startPosition.y + height, startPosition.z);
 
         // 점프 높이로 순간 이동
         transform.position = peakPosition;
@@ -136,11 +162,38 @@ public class PlayerController : MonoBehaviour
 
     public void JumpUp()
     {
-        StartCoroutine(JumpRoutine(jumpHeight));
+        if (currentJumpRoutine != null)
+        {
+            StopCoroutine(currentJumpRoutine);
+        }
+        currentJumpRoutine = StartCoroutine(JumpRoutine(jumpHeight));
     }
 
     public void JumpDown()
     {
-        StartCoroutine(JumpRoutine(-jumpHeight));
+        if (currentJumpRoutine != null)
+        {
+            StopCoroutine(currentJumpRoutine);
+        }
+        currentJumpRoutine = StartCoroutine(JumpRoutine(-jumpHeight));
+    }
+
+    void LandOnClosestPlatformBelow()
+    {
+        if (currentJumpRoutine != null)
+        {
+            StopCoroutine(currentJumpRoutine);
+            currentJumpRoutine = null;
+        }
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, Mathf.Infinity, groundLayer);
+        if (hit.collider != null)
+        {
+            transform.position = new Vector3(transform.position.x, hit.point.y, transform.position.z);
+            isGrounded = true;
+            isJumping = false;
+            rb.gravityScale = originalGravityScale;
+            animator.SetTrigger("Land");
+        }
     }
 }

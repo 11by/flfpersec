@@ -1897,39 +1897,39 @@ MonoBehaviour:
   - spawn: 1
     type: Up
     yPosition: 0
-  - spawn: 0
-    type: 
-    yPosition: 0
   - spawn: 1
     type: Up
     yPosition: 1
-  - spawn: 0
-    type: 
-    yPosition: 0
   - spawn: 1
     type: Down
     yPosition: 2
-  - spawn: 0
-    type: 
-    yPosition: 0
+  - spawn: 1
+    type: Up
+    yPosition: 1
+  - spawn: 1
+    type: Down
+    yPosition: 2
+  - spawn: 1
+    type: Up
+    yPosition: 1
+  - spawn: 1
+    type: Up
+    yPosition: 2
+  - spawn: 1
+    type: Down
+    yPosition: 3
+  - spawn: 1
+    type: Down
+    yPosition: 2
   - spawn: 1
     type: Down
     yPosition: 1
   - spawn: 0
     type: 
     yPosition: 0
-  - spawn: 0
+  - spawn: 1
     type: 
-    yPosition: 0
-  - spawn: 0
-    type: 
-    yPosition: 0
-  - spawn: 0
-    type: 
-    yPosition: 0
-  - spawn: 0
-    type: 
-    yPosition: 0
+    yPosition: 1
   - spawn: 0
     type: 
     yPosition: 0
