@@ -8,8 +8,8 @@ public class EnemyManager : MonoBehaviour
     public float scrollSpeed = 2.0f;
     public float beatsPerMinute = 120.0f; // BPM
     public float durationInSeconds = 30.0f; // 게임이 진행될 시간(초)
-    public bool[] enemyPattern; // 적이 나타날 박자 패턴
-    public float[] enemyYPositions;
+    public EnemyType[] enemyPattern; // 적이 나타날 박자 패턴 (적의 종류와 y좌표)
+    public float jumpHeight; // 점프 높이
 
     private float beatInterval;
     private int numberOfBeats;
@@ -21,10 +21,11 @@ public class EnemyManager : MonoBehaviour
 
         for (int i = 0; i < numberOfBeats; i++)
         {
-            if (enemyPattern[i])
+            if (enemyPattern[i] != null && enemyPattern[i].spawn)
             {
-                Vector3 position = new Vector3(i * beatInterval * scrollSpeed, -2 + enemyYPositions[i], 0);
-                enemySpawner.SpawnEnemy(position);
+                float yPos = -2 + (enemyPattern[i].yPosition * jumpHeight);
+                Vector3 position = new Vector3(i * beatInterval * scrollSpeed, yPos, 0);
+                enemySpawner.SpawnEnemy(position, enemyPattern[i].type);
             }
         }
     }
@@ -33,4 +34,12 @@ public class EnemyManager : MonoBehaviour
     {
         Instantiate(enemySpawner, position, Quaternion.identity);
     }
+}
+
+[System.Serializable]
+public class EnemyType
+{
+    public bool spawn; // 적이 나타날지 여부
+    public string type; // 적의 종류 ("Normal", "Up", "Down")
+    public float yPosition; // 적의 y좌표 (Jump Height 단위)
 }
