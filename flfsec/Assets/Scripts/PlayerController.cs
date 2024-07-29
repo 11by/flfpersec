@@ -42,13 +42,19 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("IsAirborne", !isGrounded);
 
         // 파티클 이펙트 제어
-        if (isGrounded && !dustParticle.isPlaying)
+        if (isGrounded && !isJumping)
         {
-            dustParticle.Play();
+            if (!dustParticle.isPlaying)
+            {
+                dustParticle.Play();
+            }
         }
-        else if (!isGrounded && dustParticle.isPlaying)
+        else
         {
-            dustParticle.Stop();
+            if (dustParticle.isPlaying)
+            {
+                dustParticle.Stop();
+            }
         }
     }
 
@@ -91,7 +97,7 @@ public class PlayerController : MonoBehaviour
         transform.position = peakPosition;
 
         // 공중에 떠 있는 시간 동안 대기
-        yield return new WaitForSeconds(airTime);
+        yield return new WaitForSeconds(0);
 
         // 점프 루틴 종료
         isJumping = false;
