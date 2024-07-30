@@ -99,8 +99,31 @@ public class PlayerController : MonoBehaviour
         // 점프 높이로 순간 이동
         transform.position = peakPosition;
 
-        // 공중에 떠 있는 시간 동안 대기
-        yield return new WaitForSeconds(airTime);
+        // 공중에 떠 있는 동안 대기
+        float airTime = 1.0f; // 공중에 떠 있는 최대 시간
+        float timeInAir = 0f;
+
+        while (timeInAir < airTime)
+        {
+            // 점프 중 입력이 있는지 확인
+            if (Input.GetButton("Jump")) // "Jump" 버튼이 눌린 경우
+            {
+                // 입력이 있으므로 계속 공중에 머물러 있음
+                timeInAir = 0; // 시간을 초기화
+            }
+            else
+            {
+                timeInAir += Time.deltaTime; // 입력이 없으면 공중에 있는 시간 증가
+            }
+
+            yield return null; // 다음 프레임까지 대기
+        }
+
+        // 입력이 없어서 1초가 지나면 중력 적용
+        LandOnClosestPlatformBelow();
+
+        // 땅으로 떨어지는 애니메이션 추가 (필요시)
+        // animator.SetTrigger("Fall");
 
         // 점프 루틴 종료
         isJumping = false;
