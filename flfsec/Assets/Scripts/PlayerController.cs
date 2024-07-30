@@ -29,13 +29,16 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         // 점프 입력 체크
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded && !isJumping)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            currentJumpRoutine = StartCoroutine(NormalJump(jumpHeight));
-        }
-        else if (Input.GetKeyDown(KeyCode.Space) && isJumping)
-        {
-            LandOnClosestPlatformBelow();
+            if (isGrounded && !isJumping)
+            {
+                currentJumpRoutine = StartCoroutine(NormalJump(jumpHeight));
+            }
+            else if (isJumping)
+            {
+                LandOnClosestPlatformBelow();
+            }
         }
 
         // 애니메이션 설정
@@ -97,7 +100,7 @@ public class PlayerController : MonoBehaviour
         transform.position = peakPosition;
 
         // 공중에 떠 있는 시간 동안 대기
-        yield return new WaitForSeconds(0);
+        yield return new WaitForSeconds(airTime);
 
         // 점프 루틴 종료
         isJumping = false;
