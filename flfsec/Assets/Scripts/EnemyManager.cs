@@ -10,9 +10,11 @@ public class EnemyManager : MonoBehaviour
     public float durationInSeconds = 30.0f; // 게임이 진행될 시간(초)
     public EnemyType[] enemyPattern; // 적이 나타날 박자 패턴 (적의 종류와 y좌표)
     public float jumpHeight; // 점프 높이
+    public Transform player;
 
     private float beatInterval;
     private int numberOfBeats;
+    private int enemyCount = 0;
 
     void Start()
     {
@@ -24,8 +26,20 @@ public class EnemyManager : MonoBehaviour
             if (enemyPattern[i] != null && enemyPattern[i].spawn)
             {
                 float yPos = -2 + (enemyPattern[i].yPosition * jumpHeight);
-                Vector3 position = new Vector3(i * beatInterval * scrollSpeed, yPos, 0);
+                Vector3 position;
+
+                if (enemyCount == 0)
+                {
+                    // 첫 번째 적의 위치를 플레이어의 중앙에 맞추기
+                    position = new Vector3(player.position.x, yPos, 0);
+                }
+                else
+                {
+                    position = new Vector3(player.position.x + i * beatInterval * scrollSpeed, yPos, 0);
+                }
+
                 enemySpawner.SpawnEnemy(position, enemyPattern[i].type);
+                enemyCount++;
             }
         }
     }

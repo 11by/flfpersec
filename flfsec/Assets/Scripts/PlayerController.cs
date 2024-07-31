@@ -9,9 +9,12 @@ public class PlayerController : MonoBehaviour
     public LayerMask groundLayer; // 발판 레이어 마스크
     public float groundCheckDistance = 1.0f; // 발판 검사 거리
     public float fixedXPosition = -5.5f; // 플레이어의 고정된 x 좌표
-    public int lives = 3; // 플레이어의 목숨
+    public int maxHealth = 3; // 플레이어의 목숨
     public Animator animator;
     public ParticleSystem dustParticle;
+
+    bool isDie = false;
+    int health = 3;
 
     private Rigidbody2D rb;
     private bool isGrounded; // 발판 위에 있는지 여부 체크
@@ -24,6 +27,8 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         originalGravityScale = rb.gravityScale; // 시작 시 중력 값 저장
         CheckGrounded();
+
+        health = maxHealth;
     }
 
     void Update()
@@ -59,6 +64,15 @@ public class PlayerController : MonoBehaviour
                 dustParticle.Stop();
             }
         }
+
+        if (health == 0)
+        {
+            if (!isDie)
+            {
+                Die();
+            }
+            return;
+        }
     }
 
     void FixedUpdate()
@@ -69,6 +83,21 @@ public class PlayerController : MonoBehaviour
         Vector3 position = transform.position;
         position.x = fixedXPosition;
         transform.position = position;
+
+        if (health == 0)
+        {
+            return;
+        }
+    }
+
+    void Die()
+    {
+        isDie = true;
+
+        rb.velocity = Vector2.zero;
+        animator.Play("Die");
+
+
     }
 
     void CheckGrounded()
@@ -159,32 +188,6 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            LoseLife();
-        }
-        else if (collision.gameObject.CompareTag("Dead"))
-        {
-            Die();
-        }
-    }
-
-    void LoseLife()
-    {
-        lives--;
-        if (lives <= 0)
-        {
-            Die();
-        }
-        else
-        {
-            Debug.Log("Player hit by enemy! Lives remaining: " + lives);
-        }
-    }
-
-    void Die()
-    {
-        Debug.Log("Player has died!");
     }
 
     public void JumpUp()
