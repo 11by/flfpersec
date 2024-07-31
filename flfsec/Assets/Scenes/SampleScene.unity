@@ -1621,9 +1621,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  groundCheckDistance: 0.2
+  groundCheckDistance: 0.01
   fixedXPosition: -5.5
-  lives: 3
+  maxHealth: 3
   animator: {fileID: 975908911}
   dustParticle: {fileID: 9062544818867178793, guid: 053e9b20643a9c848a005becbbb4a8be, type: 3}
 --- !u!212 &975908907
@@ -1666,7 +1666,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: 9906df34e862e2f4a8d6154d5570d198, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1726,7 +1726,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.09, y: 0.67}
-  m_Size: {x: 0.61, y: 1.28}
+  m_Size: {x: 0.16, y: 1.28}
   m_Direction: 0
 --- !u!114 &975908910
 MonoBehaviour:
@@ -1835,12 +1835,12 @@ MonoBehaviour:
   - spawn: 0
     type: 
     yPosition: 0
-  - spawn: 0
-    type: 
+  - spawn: 1
+    type: Up
     yPosition: 0
-  - spawn: 0
-    type: 
-    yPosition: 0
+  - spawn: 1
+    type: Down
+    yPosition: 1
   - spawn: 0
     type: 
     yPosition: 0
@@ -2010,6 +2010,7 @@ MonoBehaviour:
     type: 
     yPosition: 0
   jumpHeight: 2.4
+  player: {fileID: 975908908}
 --- !u!4 &1020251494
 Transform:
   m_ObjectHideFlags: 0
