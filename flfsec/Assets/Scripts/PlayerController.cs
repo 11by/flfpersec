@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour
     {
         isDie = true;
 
-        Time.timeScale = 0;
+        rb.velocity = Vector2.zero;
         animator.Play("Die");
         StartCoroutine(ShowDeathUI());
     }
@@ -158,7 +158,7 @@ public class PlayerController : MonoBehaviour
             transform.position = new Vector3(transform.position.x, hit.point.y, transform.position.z);
             isGrounded = true;
             rb.gravityScale = originalGravityScale;
-            animator.SetTrigger("Land");
+            animator.Play("Land");
         }
         else
         {
