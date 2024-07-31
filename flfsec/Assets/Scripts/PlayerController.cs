@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -38,7 +39,7 @@ public class PlayerController : MonoBehaviour
         {
             if (isGrounded && !isJumping)
             {
-                currentJumpRoutine = StartCoroutine(NormalJump(jumpHeight));
+                currentJumpRoutine = StartCoroutine(JumpRoutine(jumpHeight));
             }
             else if (isJumping)
             {
@@ -96,8 +97,6 @@ public class PlayerController : MonoBehaviour
 
         rb.velocity = Vector2.zero;
         animator.Play("Die");
-
-
     }
 
     void CheckGrounded()
@@ -128,66 +127,43 @@ public class PlayerController : MonoBehaviour
         // 점프 높이로 순간 이동
         transform.position = peakPosition;
 
-        // 공중에 떠 있는 동안 대기
-        float airTime = 1.0f; // 공중에 떠 있는 최대 시간
-        float timeInAir = 0f;
+        // 공중에 떠 있는 시간 동안 대기
+        yield return new WaitForSeconds(airTime);
 
-        while (timeInAir < airTime)
-        {
-            // 점프 중 입력이 있는지 확인
-            if (Input.GetButton("Jump")) // "Jump" 버튼이 눌린 경우
-            {
-                // 입력이 있으므로 계속 공중에 머물러 있음
-                timeInAir = 0; // 시간을 초기화
-            }
-            else
-            {
-                timeInAir += Time.deltaTime; // 입력이 없으면 공중에 있는 시간 증가
-            }
-
-            yield return null; // 다음 프레임까지 대기
-        }
-
-        // 입력이 없어서 1초가 지나면 착지
+        // 착지 확인 및 상태 업데이트
         LandOnClosestPlatformBelow();
-
-        // 땅으로 떨어지는 애니메이션 추가 (필요시)
-        // animator.SetTrigger("Fall");
 
         // 점프 루틴 종료
         isJumping = false;
     }
 
-    IEnumerator NormalJump(float height)
+    void LandOnClosestPlatformBelow()
     {
-        isJumping = true;
-        isGrounded = false;
-        animator.SetTrigger("Jump");
-
-        // 점프 시작
-        rb.gravityScale = 0; // 중력 값 0으로 설정
-        Vector3 startPosition = transform.position;
-        Vector3 peakPosition = new Vector3(startPosition.x, startPosition.y + height, startPosition.z);
-
-        // 점프 높이로 순간 이동
-        transform.position = peakPosition;
-
-        // 공중에 떠 있는 시간 동안 대기
-        yield return new WaitForSeconds(airTime);
-
-        // 땅으로 순간 이동
-        LandOnClosestPlatformBelow();
-        CheckGrounded();
-
-        // 착지할 때의 애니메이션 트리거
-        if (isGrounded)
+        if (currentJumpRoutine != null)
         {
+            StopCoroutine(currentJumpRoutine);
+            currentJumpRoutine = null;
+        }
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, Mathf.Infinity, groundLayer);
+        if (hit.collider != null)
+        {
+            transform.position = new Vector3(transform.position.x, hit.point.y, transform.position.z);
+            isGrounded = true;
+            rb.gravityScale = originalGravityScale;
             animator.SetTrigger("Land");
         }
+        else
+        {
+            isGrounded = false;
+        }
+
+        isJumping = false;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
+        // 충돌 처리 로직 추가 (필요 시)
     }
 
     public void JumpUp()
@@ -205,25 +181,14 @@ public class PlayerController : MonoBehaviour
         {
             StopCoroutine(currentJumpRoutine);
         }
-        currentJumpRoutine = StartCoroutine(JumpRoutine(-jumpHeight));
-    }
 
-    void LandOnClosestPlatformBelow()
-    {
-        if (currentJumpRoutine != null)
+        if (transform.position.y < 0.3)
         {
-            StopCoroutine(currentJumpRoutine);
-            currentJumpRoutine = null;
+            LandOnClosestPlatformBelow();
         }
-
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, Mathf.Infinity, groundLayer);
-        if (hit.collider != null)
+        else
         {
-            transform.position = new Vector3(transform.position.x, hit.point.y, transform.position.z);
-            isGrounded = true;
-            isJumping = false;
-            rb.gravityScale = originalGravityScale;
-            animator.SetTrigger("Land");
+            currentJumpRoutine = StartCoroutine(JumpRoutine(-jumpHeight));
         }
     }
 }
