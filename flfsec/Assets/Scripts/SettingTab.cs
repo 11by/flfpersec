@@ -1,18 +1,49 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SettingTab : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public bool IsSettingOpened;
+
+    public GameObject settingsMenu; // Settings Menu UI
+    public Button settingsButton; // Button to open Settings Menu
+    public Button backButton; // Button to go back to Pause Menu
+
     void Start()
     {
-        
+        IsSettingOpened = false;
+
+        settingsMenu.SetActive(false);
+
+        // Assign button click events
+        if (settingsButton != null)
+        {
+            settingsButton.onClick.AddListener(OpenSettings);
+        }
+
+        if (backButton != null)
+        {
+            backButton.onClick.AddListener(CloseSettings);
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Escape) && IsSettingOpened)
+        {
+            CloseSettings();
+        }
+    }
+
+    void OpenSettings()
+    {
+        IsSettingOpened = true;
+        settingsMenu.SetActive(true);
+    }
+
+    void CloseSettings()
+    {
+        IsSettingOpened = false;
+        settingsMenu.SetActive(false);
     }
 }

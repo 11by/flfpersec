@@ -119,7 +119,7 @@ public class PlayerController : MonoBehaviour
             yield return null; // 다음 프레임까지 대기
         }
 
-        // 입력이 없어서 1초가 지나면 중력 적용
+        // 입력이 없어서 1초가 지나면 착지
         LandOnClosestPlatformBelow();
 
         // 땅으로 떨어지는 애니메이션 추가 (필요시)
@@ -147,12 +147,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(airTime);
 
         // 땅으로 순간 이동
-        Vector3 groundPosition = new Vector3(startPosition.x, startPosition.y, startPosition.z);
-        transform.position = groundPosition;
-
-        // 중력 값 원래대로 설정
-        rb.gravityScale = originalGravityScale;
-        isJumping = false;
+        LandOnClosestPlatformBelow();
         CheckGrounded();
 
         // 착지할 때의 애니메이션 트리거

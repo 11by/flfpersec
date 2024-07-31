@@ -5,9 +5,11 @@ using UnityEngine.UI;
 
 public class Pause : MonoBehaviour
 {
+    SettingTab settingTab;
 
     private bool IsPause;
     private bool IsResume;
+    private bool IsDelayActive;
 
     public Image pauseSprite;
     public Animator uiAnimator;
@@ -33,6 +35,8 @@ public class Pause : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (IsDelayActive) return;
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (!IsPause)
@@ -72,6 +76,7 @@ public class Pause : MonoBehaviour
     IEnumerator ResumeGameAfterDelay(float delay)
     {
         IsResume = true;
+        IsDelayActive = true;
 
         if (uiAnimator != null)
         {
@@ -83,6 +88,7 @@ public class Pause : MonoBehaviour
         Time.timeScale = 1;
         IsPause = false;
         IsResume = false;
+        IsDelayActive = false;
         pauseSprite.enabled = false;
     }
 }
