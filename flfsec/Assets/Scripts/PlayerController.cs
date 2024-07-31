@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     public int maxHealth = 3; // 플레이어의 목숨
     public Animator animator;
     public ParticleSystem dustParticle;
+    public GameObject DeathUI;
 
     bool isDie = false;
     int health = 3;
@@ -41,9 +42,14 @@ public class PlayerController : MonoBehaviour
             {
                 currentJumpRoutine = StartCoroutine(JumpRoutine(jumpHeight));
             }
-            else if (isJumping)
+            else if (isJumping && IsPlatformBelow())
             {
                 LandOnClosestPlatformBelow();
+            }
+            else if (isJumping && !IsPlatformBelow())
+            {
+                // 플레이어가 공중 상태이면서 아래 방향에 발판이 없는 경우
+                return;
             }
         }
 
@@ -95,8 +101,9 @@ public class PlayerController : MonoBehaviour
     {
         isDie = true;
 
-        rb.velocity = Vector2.zero;
+        Time.timeScale = 0;
         animator.Play("Die");
+        StartCoroutine(ShowDeathUI());
     }
 
     void CheckGrounded()
@@ -163,7 +170,17 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        // 충돌 처리 로직 추가 (필요 시)
+        if (collision.collider.CompareTag("Dead"))
+        {
+            Die();
+            Time.timeScale = 0f;
+        }
+    }
+
+    IEnumerator ShowDeathUI()
+    {
+        yield return new WaitForSecondsRealtime(1f);
+        DeathUI.SetActive(true);
     }
 
     public void JumpUp()
@@ -190,5 +207,12 @@ public class PlayerController : MonoBehaviour
         {
             currentJumpRoutine = StartCoroutine(JumpRoutine(-jumpHeight));
         }
+    }
+
+    // 플레이어 아래에 발판이 있는지 확인
+    bool IsPlatformBelow()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, Mathf.Infinity, groundLayer);
+        return hit.collider != null && hit.collider.CompareTag("Platform");
     }
 }

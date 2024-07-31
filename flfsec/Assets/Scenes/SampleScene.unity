@@ -862,7 +862,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 975908908}
   smoothing: 0.1
-  minCameraBoundary: {x: 0, y: -1.5}
+  minCameraBoundary: {x: 0, y: -0.45}
   maxCameraBoundary: {x: 2.66, y: 100}
 --- !u!114 &519420035
 MonoBehaviour:
@@ -1424,7 +1424,7 @@ MonoBehaviour:
   scrollSpeed: 10.5
   beatsPerMinute: 120
   durationInSeconds: 30
-  platformPattern: 010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101
+  platformPattern: 010101010001010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101
   musicEmitter: {fileID: 777786803}
   progressBarController: {fileID: 0}
   player: {fileID: 975908908}
@@ -1626,6 +1626,7 @@ MonoBehaviour:
   maxHealth: 3
   animator: {fileID: 975908911}
   dustParticle: {fileID: 9062544818867178793, guid: 053e9b20643a9c848a005becbbb4a8be, type: 3}
+  DeathUI: {fileID: 0}
 --- !u!212 &975908907
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1835,12 +1836,6 @@ MonoBehaviour:
   - spawn: 0
     type: 
     yPosition: 0
-  - spawn: 1
-    type: Up
-    yPosition: 0
-  - spawn: 1
-    type: Down
-    yPosition: 1
   - spawn: 0
     type: 
     yPosition: 0
@@ -1859,42 +1854,48 @@ MonoBehaviour:
   - spawn: 0
     type: 
     yPosition: 0
-  - spawn: 1
-    type: Up
-    yPosition: 0
-  - spawn: 1
-    type: Up
-    yPosition: 1
-  - spawn: 1
-    type: Down
-    yPosition: 2
-  - spawn: 1
-    type: Up
-    yPosition: 1
-  - spawn: 1
-    type: Down
-    yPosition: 2
-  - spawn: 1
-    type: Up
-    yPosition: 1
-  - spawn: 1
-    type: Up
-    yPosition: 2
-  - spawn: 1
-    type: Down
-    yPosition: 3
-  - spawn: 1
-    type: Down
-    yPosition: 2
-  - spawn: 1
-    type: Down
-    yPosition: 1
   - spawn: 0
     type: 
     yPosition: 0
-  - spawn: 1
+  - spawn: 0
     type: 
-    yPosition: 1
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
   - spawn: 0
     type: 
     yPosition: 0
