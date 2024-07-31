@@ -1,11 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Pause : MonoBehaviour
 {
-    SettingTab settingTab;
+    private SettingTab settingTab;
 
     private bool IsPause;
     private bool IsResume;
@@ -17,11 +16,13 @@ public class Pause : MonoBehaviour
     private readonly string showTrigger = "doShow";
     private readonly string hideTrigger = "doHide";
 
-    // Start is called before the first frame update
     void Start()
     {
-        IsPause = false;   
+        settingTab = FindObjectOfType<SettingTab>();
+
+        IsPause = false;
         IsResume = false;
+        IsDelayActive = false;
         pauseSprite.enabled = false;
 
         if (uiAnimator != null)
@@ -32,18 +33,20 @@ public class Pause : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (IsDelayActive) return;
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (!IsPause)
+            if (settingTab.IsSettingOpened)
+            {
+                settingTab.CloseSettings();
+            }
+            else if (!IsPause)
             {
                 PauseGame();
             }
-
             else if (IsPause && !IsResume)
             {
                 StartCoroutine(ResumeGameAfterDelay(3.0f));
@@ -54,7 +57,7 @@ public class Pause : MonoBehaviour
     void PauseGame()
     {
         IsPause = true;
-        IsResume= false;
+        IsResume = false;
 
         if (uiAnimator != null)
         {

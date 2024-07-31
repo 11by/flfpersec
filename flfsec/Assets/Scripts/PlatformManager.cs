@@ -32,7 +32,18 @@ public class PlatformManager : MonoBehaviour
         {
             if (platformPattern[i])
             {
-                Vector3 position = new Vector3(i * beatInterval * scrollSpeed, -4, 0);
+                Vector3 position;
+
+                if (platformCount == 0)
+                {
+                    // 첫 번째 발판의 위치를 플레이어의 중앙에 맞추기
+                    position = new Vector3(player.position.x, -4, 0);
+                }
+                else
+                {
+                    position = new Vector3(player.position.x + i * beatInterval * scrollSpeed, -4, 0);
+                }
+
                 GameObject platform = platformSpawner.SpawnPlatform(position);
                 platforms.Add(platform);
 

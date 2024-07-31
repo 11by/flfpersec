@@ -35,13 +35,13 @@ public class SettingTab : MonoBehaviour
         }
     }
 
-    void OpenSettings()
+    public void OpenSettings()
     {
         IsSettingOpened = true;
         settingsMenu.SetActive(true);
     }
 
-    void CloseSettings()
+    public void CloseSettings()
     {
         IsSettingOpened = false;
         settingsMenu.SetActive(false);

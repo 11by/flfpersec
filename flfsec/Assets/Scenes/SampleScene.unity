@@ -468,6 +468,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf2672f3d51fdd64b92f4fc23080354c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsSettingOpened: 0
   settingsMenu: {fileID: 540866460}
   settingsButton: {fileID: 1138178480}
   backButton: {fileID: 1690377256}
@@ -1686,7 +1687,7 @@ Transform:
   m_GameObject: {fileID: 975908904}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.68, y: -1.37, z: 0}
+  m_LocalPosition: {x: -5.68, y: -3.37, z: 0}
   m_LocalScale: {x: 1.6983, y: 1.6983, z: 1.6983}
   m_ConstrainProportionsScale: 0
   m_Children: []
