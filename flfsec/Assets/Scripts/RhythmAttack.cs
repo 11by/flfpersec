@@ -68,15 +68,13 @@ public class RhythmAttack : MonoBehaviour
             // 적의 이름에 따른 플레이어의 동작 설정
             if (enemy.name.Contains("Up"))
             {
-                CameraShake.instance.StartShake(0.1f);
                 playerController.JumpUp();
             }
             else if (enemy.name.Contains("Down"))
             {
-                CameraShake.instance.StartShake(0.1f);
                 playerController.JumpDown();
             }
-
+            CameraShake.instance.StartShake(0.1f);
             Destroy(enemy);
         }
     }

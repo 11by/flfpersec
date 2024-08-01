@@ -5,6 +5,12 @@ public class CameraShake : MonoBehaviour
 {
     public static CameraShake instance;
 
+    public float minSize = 3.0f; // 최소 카메라 사이즈
+    public float maxSize = 5.0f; // 최대 카메라 사이즈
+
+    private Camera mainCamera;
+    private float originalSize;
+
     private void Awake()
     {
         if (instance == null)
@@ -15,26 +21,26 @@ public class CameraShake : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        mainCamera = Camera.main;
+        originalSize = mainCamera.orthographicSize;
     }
 
     public IEnumerator Shake(float duration)
     {
-        Vector3 originalPosition = transform.localPosition;
-
         float elapsed = 0.0f;
 
         while (elapsed < duration)
         {
-            float x = Random.Range(0, 0.2f);
-
-            transform.localPosition = new Vector3(x, originalPosition.y, originalPosition.z);
+            float newSize = Random.Range(minSize, maxSize);
+            mainCamera.orthographicSize = newSize;
 
             elapsed += Time.deltaTime;
 
             yield return null;
         }
 
-        transform.localPosition = originalPosition;
+        mainCamera.orthographicSize = originalSize;
     }
 
     public void StartShake(float duration)
