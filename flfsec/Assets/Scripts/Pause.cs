@@ -73,7 +73,12 @@ public class Pause : MonoBehaviour
 
         if (uiAnimator != null)
         {
-            uiAnimator.SetTrigger(showTrigger);
+            if (IsDelayActive) return;
+
+            else
+            {
+                uiAnimator.SetTrigger(showTrigger);
+            }
         }
 
         pauseSprite.enabled = true;
