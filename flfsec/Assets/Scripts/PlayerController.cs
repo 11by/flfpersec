@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -168,9 +169,9 @@ public class PlayerController : MonoBehaviour
         isJumping = false;
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collision.collider.CompareTag("Dead"))
+        if (collider.CompareTag("Dead"))
         {
             Die();
             Time.timeScale = 0f;

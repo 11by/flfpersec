@@ -46,8 +46,7 @@ public class Pause : MonoBehaviour
     void Update()
     {
         // 지연 상태라면 아무것도 하지 않음
-        if (IsDelayActive)
-            return;
+        if (IsDelayActive) return;
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {

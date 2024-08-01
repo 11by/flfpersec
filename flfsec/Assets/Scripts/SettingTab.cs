@@ -29,6 +29,16 @@ public class SettingTab : MonoBehaviour
 
     void Update()
     {
+        if (settingsMenu.activeSelf == false)
+        {
+            IsSettingOpened = false;
+        }
+
+        else if (settingsMenu.activeSelf == true)
+        {
+            IsSettingOpened = true;
+        }
+
         if (Input.GetKeyDown(KeyCode.Escape) && IsSettingOpened)
         {
             CloseSettings();
