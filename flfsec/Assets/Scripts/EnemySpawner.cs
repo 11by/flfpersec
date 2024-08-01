@@ -9,7 +9,7 @@ public class EnemySpawner : MonoBehaviour
     public GameObject downEnemyPrefab;
     public float scrollSpeed = 2.0f;
 
-    public void SpawnEnemy(Vector3 position, string type)
+    public GameObject SpawnEnemy(Vector3 position, string type)
     {
         GameObject enemyPrefab;
 
@@ -30,5 +30,6 @@ public class EnemySpawner : MonoBehaviour
         enemy.AddComponent<EnemyScroller>().scrollSpeed = scrollSpeed;
         float enemyLength = 1f; // 발판의 길이 설정 (원하는 크기로 조정)
         enemy.transform.localScale = new Vector3(enemyLength, 1, 1);
+        return enemy;
     }
 }

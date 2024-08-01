@@ -34,15 +34,28 @@ public class EnemyManager : MonoBehaviour
                 float yPos = -2 + (enemyPattern[i].yPosition * jumpHeight);
                 Vector3 position = new Vector3(player.position.x + i * beatInterval * scrollSpeed, yPos, 0);
 
-                enemySpawner.SpawnEnemy(position, enemyPattern[i].type);
+                GameObject enemy = enemySpawner.SpawnEnemy(position, enemyPattern[i].type);
+                enemy.SetActive(true); // 적을 활성화
+                ApplyAnimationToEnemy(enemy, yPos);
                 enemyCount++;
             }
         }
     }
 
-    void SpawnEnemy(Vector2 position)
+    void ApplyAnimationToEnemy(GameObject enemy, float yPos)
     {
-        Instantiate(enemySpawner, position, Quaternion.identity);
+        Enemy enemyScript = enemy.GetComponent<Enemy>();
+        if (enemyScript != null)
+        {
+            if (yPos > -2)
+            {
+                enemyScript.SetAnimation("Enem_Air");
+            }
+            else
+            {
+                enemyScript.SetAnimation("Enem_Ground");
+            }
+        }
     }
 }
 
