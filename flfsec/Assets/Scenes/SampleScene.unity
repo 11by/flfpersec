@@ -1423,8 +1423,8 @@ MonoBehaviour:
   platformSpawner: {fileID: 1620809270}
   scrollSpeed: 10.5
   beatsPerMinute: 120
-  durationInSeconds: 30
-  platformPattern: 010101010001010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101
+  durationInSeconds: 60
+  platformPattern: 010101010101010101010001010100010101000101010001010101010101010101010101010101010101000101010001010100010101000101010001010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101
   musicEmitter: {fileID: 777786803}
   progressBarController: {fileID: 0}
   player: {fileID: 975908908}
@@ -1593,10 +1593,10 @@ GameObject:
   - component: {fileID: 975908908}
   - component: {fileID: 975908907}
   - component: {fileID: 975908905}
-  - component: {fileID: 975908909}
   - component: {fileID: 975908910}
   - component: {fileID: 975908911}
   - component: {fileID: 975908912}
+  - component: {fileID: 975908913}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -1694,41 +1694,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!70 &975908909
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 975908904}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.09, y: 0.67}
-  m_Size: {x: 0.16, y: 1.28}
-  m_Direction: 0
 --- !u!114 &975908910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1796,6 +1761,51 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!61 &975908913
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 975908904}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: 4e5977aef8b579d49a3f50ef9a836a10, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.06, y: 0.725}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 0.86, y: 1.45}
+    newSize: {x: 0.86, y: 1.45}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.59, y: 1.42}
+  m_EdgeRadius: 0
 --- !u!1 &1020251492
 GameObject:
   m_ObjectHideFlags: 0
@@ -1828,8 +1838,188 @@ MonoBehaviour:
   enemySpawner: {fileID: 608383088}
   scrollSpeed: 10.5
   beatsPerMinute: 120
-  durationInSeconds: 30
+  durationInSeconds: 60
   enemyPattern:
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 1
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 1
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 1
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 1
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 1
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 1
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 1
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 1
+    type: 
+    yPosition: 1
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 1
+    type: 
+    yPosition: 0
+  - spawn: 1
+    type: Up
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
   - spawn: 0
     type: 
     yPosition: 0
