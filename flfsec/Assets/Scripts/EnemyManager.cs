@@ -35,7 +35,6 @@ public class EnemyManager : MonoBehaviour
                 Vector3 position = new Vector3(player.position.x + i * beatInterval * scrollSpeed, yPos, 0);
 
                 GameObject enemy = enemySpawner.SpawnEnemy(position, enemyPattern[i].type);
-                enemy.SetActive(true); // 적을 활성화
                 ApplyAnimationToEnemy(enemy, yPos);
                 enemyCount++;
             }
@@ -49,11 +48,11 @@ public class EnemyManager : MonoBehaviour
         {
             if (yPos > -2)
             {
-                enemyScript.SetAnimation("Enem_Air");
+                enemyScript.SetAnimation("EnemAir");
             }
             else
             {
-                enemyScript.SetAnimation("Enem_Ground");
+                enemyScript.SetAnimation("EnemGround");
             }
         }
     }
