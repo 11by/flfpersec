@@ -140,6 +140,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(airTime);
 
         isJumping = false;
+
         // 착지 확인 및 상태 업데이트
         LandOnClosestPlatformBelow();
     }
