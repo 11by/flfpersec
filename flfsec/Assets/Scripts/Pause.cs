@@ -16,7 +16,6 @@ public class Pause : MonoBehaviour
     public GameObject settingsMenu;     // 설정 메뉴 UI
     public Button settingsButton;       // 설정 메뉴 열기 버튼
     public Button backButton;           // 설정 메뉴 닫기 버튼
-    public MusicController musicController;
 
     private readonly string showTrigger = "doShow";
     private readonly string hideTrigger = "doHide";
@@ -38,36 +37,37 @@ public class Pause : MonoBehaviour
             uiAnimator.ResetTrigger(hideTrigger);
         }
         if (settingsButton != null)
+        {
             settingsButton.onClick.AddListener(OpenSettings);
+        }
 
         if (backButton != null)
+        {
             backButton.onClick.AddListener(CloseSettings);
+        }
     }
 
     void Update()
     {
         // 지연 상태라면 아무것도 하지 않음
         if (IsDelayActive)
-        {
             return;
-        }
 
+        // Esc 키가 눌린 경우
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            // 실행 중 esc키가 눌린 경우 -> 게임 정지
             if (!IsPause)
             {
                 PauseGame();
-                musicController.PauseMusic();
             }
-            // 정지 상태이고 설정 창이 켜져 있는 경우 -> 설정창 꺼짐
-            else if (IsPause && IsSettingOpened)
+            else if (IsSettingOpened)
+            {
                 CloseSettings(); // 설정창이 열려있으면 닫기
-
-            // 정지 상태이고 설정 창이 꺼져있는 경우 -> 게임 재개
-            else if (IsPause && !IsSettingOpened)
-                StartCoroutine(ResumeGameAfterDelay(3.0f));
-
+            }
+            else
+            {
+                StartCoroutine(ResumeGameAfterDelay(3.0f)); // 게임 재개
+            }
         }
     }
 
@@ -76,9 +76,9 @@ public class Pause : MonoBehaviour
         IsPause = true;
         IsResume = false;
 
-        if (uiAnimator != null && !IsDelayActive)
+        if (uiAnimator != null)
         {
-            uiAnimator.SetTrigger(showTrigger);
+            uiAnimator.SetTrigger(showTrigger); // UI 애니메이션 트리거
         }
 
         pauseSprite.enabled = true;
@@ -107,8 +107,8 @@ public class Pause : MonoBehaviour
 
     IEnumerator ResumeGameAfterDelay(float delay)
     {
-        IsDelayActive = true;
         IsResume = true;
+        IsDelayActive = true;
 
         if (uiAnimator != null)
         {
@@ -118,7 +118,6 @@ public class Pause : MonoBehaviour
         yield return new WaitForSecondsRealtime(delay);
 
         Time.timeScale = 1;
-        musicController.ResumeMusic();
         IsPause = false;
         IsResume = false;
         IsDelayActive = false;

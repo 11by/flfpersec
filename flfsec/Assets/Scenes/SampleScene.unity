@@ -392,9 +392,8 @@ MonoBehaviour:
   pauseSprite: {fileID: 848227973}
   uiAnimator: {fileID: 489557015}
   settingsMenu: {fileID: 540866460}
-  settingsButton: {fileID: 2117258712}
+  settingsButton: {fileID: 1138178480}
   backButton: {fileID: 1690377256}
-  musicController: {fileID: 777786806}
 --- !u!4 &395957071
 Transform:
   m_ObjectHideFlags: 0
@@ -941,7 +940,6 @@ MonoBehaviour:
   settingsMenu: {fileID: 540866460}
   settingsButton: {fileID: 1138178480}
   backButton: {fileID: 1690377256}
-  musicController: {fileID: 777786806}
 --- !u!1 &608383087
 GameObject:
   m_ObjectHideFlags: 0
