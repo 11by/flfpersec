@@ -10,7 +10,6 @@ public class PlatformManager : MonoBehaviour
     public float beatsPerMinute = 120.0f; // BPM
     public float durationInSeconds = 30.0f; // 게임이 진행될 시간(초)
     public bool[] platformPattern;
-    public StudioEventEmitter musicEmitter;
     public ProgressBarController progressBarController;
     public Transform player;
 
@@ -48,11 +47,6 @@ public class PlatformManager : MonoBehaviour
                 platforms.Add(platform);
 
                 platformCount++;
-
-                if (platformCount == 9)
-                {
-                    musicEmitter.Play();
-                }
             }
         }
     }

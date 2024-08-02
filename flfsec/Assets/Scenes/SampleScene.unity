@@ -394,6 +394,7 @@ MonoBehaviour:
   settingsMenu: {fileID: 540866460}
   settingsButton: {fileID: 2117258712}
   backButton: {fileID: 1690377256}
+  musicController: {fileID: 777786806}
 --- !u!4 &395957071
 Transform:
   m_ObjectHideFlags: 0
@@ -940,6 +941,7 @@ MonoBehaviour:
   settingsMenu: {fileID: 540866460}
   settingsButton: {fileID: 1138178480}
   backButton: {fileID: 1690377256}
+  musicController: {fileID: 777786806}
 --- !u!1 &608383087
 GameObject:
   m_ObjectHideFlags: 0
@@ -1223,8 +1225,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 777786804}
-  - component: {fileID: 777786803}
   - component: {fileID: 777786805}
+  - component: {fileID: 777786806}
   m_Layer: 0
   m_Name: MusicEmitter
   m_TagString: Untagged
@@ -1232,37 +1234,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &777786803
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 777786802}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: 
-  EventReference:
-    Guid:
-      Data1: -2121488183
-      Data2: 1136394304
-      Data3: 995514550
-      Data4: -709396337
-    Path: event:/Music_play
-  Event: 
-  PlayEvent: 1
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  AllowNonRigidbodyDoppler: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!4 &777786804
 Transform:
   m_ObjectHideFlags: 0
@@ -1290,6 +1261,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7013190afeb3d8541ba0f3edc7d9a982, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &777786806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 777786802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3eaa4eed469368848927ee802351af8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicEventPath: event:/Music_play
 --- !u!1 &788096872
 GameObject:
   m_ObjectHideFlags: 0
@@ -1336,10 +1320,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   platformSpawner: {fileID: 1620809270}
   scrollSpeed: 10.5
-  beatsPerMinute: 120
+  beatsPerMinute: 118.5
   durationInSeconds: 60
-  platformPattern: 010101010101010101010001010100010101000101010001010101010101010101010101010101010101000101010001010100010101000101010001010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101
-  musicEmitter: {fileID: 777786803}
+  platformPattern: 010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101
   progressBarController: {fileID: 0}
   player: {fileID: 975908908}
 --- !u!1 &848227972
@@ -1628,6 +1611,7 @@ MonoBehaviour:
     m_Bits: 128
   animator: {fileID: 975908911}
   playerController: {fileID: 975908905}
+  hitSoundEventPath: event:/bat_hit
 --- !u!95 &975908911
 Animator:
   serializedVersion: 5
@@ -1797,7 +1781,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawner: {fileID: 608383088}
   scrollSpeed: 10.5
-  beatsPerMinute: 120
+  beatsPerMinute: 118.5
   durationInSeconds: 60
   enemyPattern:
   - spawn: 0
@@ -1827,51 +1811,51 @@ MonoBehaviour:
   - spawn: 0
     type: 
     yPosition: 0
-  - spawn: 0
-    type: 
+  - spawn: 1
+    type: Up
     yPosition: 0
-  - spawn: 0
+  - spawn: 1
     type: 
+    yPosition: 1
+  - spawn: 1
+    type: Up
+    yPosition: 1
+  - spawn: 1
+    type: Down
+    yPosition: 2
+  - spawn: 1
+    type: Up
+    yPosition: 1
+  - spawn: 1
+    type: Down
+    yPosition: 2
+  - spawn: 1
+    type: Down
+    yPosition: 1
+  - spawn: 1
+    type: Up
     yPosition: 0
-  - spawn: 0
+  - spawn: 1
+    type: Up
+    yPosition: 1
+  - spawn: 1
+    type: Up
+    yPosition: 2
+  - spawn: 1
+    type: Up
+    yPosition: 3
+  - spawn: 1
+    type: Up
+    yPosition: 4
+  - spawn: 1
     type: 
-    yPosition: 0
-  - spawn: 0
+    yPosition: 5
+  - spawn: 1
+    type: Down
+    yPosition: 5
+  - spawn: 1
     type: 
-    yPosition: 0
-  - spawn: 0
-    type: 
-    yPosition: 0
-  - spawn: 0
-    type: 
-    yPosition: 0
-  - spawn: 0
-    type: 
-    yPosition: 0
-  - spawn: 0
-    type: 
-    yPosition: 0
-  - spawn: 0
-    type: 
-    yPosition: 0
-  - spawn: 0
-    type: 
-    yPosition: 0
-  - spawn: 0
-    type: 
-    yPosition: 0
-  - spawn: 0
-    type: 
-    yPosition: 0
-  - spawn: 0
-    type: 
-    yPosition: 0
-  - spawn: 0
-    type: 
-    yPosition: 0
-  - spawn: 0
-    type: 
-    yPosition: 0
+    yPosition: 4
   - spawn: 0
     type: 
     yPosition: 0
@@ -2536,7 +2520,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.2785364, y: 1.2785364, z: 1.2785364}
+  m_LocalScale: {x: 12.262827, y: 12.262827, z: 12.262827}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

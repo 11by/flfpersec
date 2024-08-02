@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMODUnity;
 
 public class RhythmAttack : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class RhythmAttack : MonoBehaviour
     public LayerMask enemyLayer;
     public Animator animator; // Animator 추가
     public PlayerController playerController; // PlayerController 추가
+    public string hitSoundEventPath; // FMOD 이벤트 경로
 
     void Update()
     {
@@ -74,8 +76,20 @@ public class RhythmAttack : MonoBehaviour
             {
                 playerController.JumpDown();
             }
+
+            // 효과음 재생
+            PlayHitSound();
+
             CameraShake.instance.StartShake(0.1f);
             Destroy(enemy);
+        }
+    }
+
+    void PlayHitSound()
+    {
+        if (!string.IsNullOrEmpty(hitSoundEventPath))
+        {
+            RuntimeManager.PlayOneShot(hitSoundEventPath);
         }
     }
 

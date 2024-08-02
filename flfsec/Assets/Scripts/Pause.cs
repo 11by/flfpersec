@@ -16,6 +16,7 @@ public class Pause : MonoBehaviour
     public GameObject settingsMenu;     // 설정 메뉴 UI
     public Button settingsButton;       // 설정 메뉴 열기 버튼
     public Button backButton;           // 설정 메뉴 닫기 버튼
+    public MusicController musicController;
 
     private readonly string showTrigger = "doShow";
     private readonly string hideTrigger = "doHide";
@@ -46,7 +47,10 @@ public class Pause : MonoBehaviour
     void Update()
     {
         // 지연 상태라면 아무것도 하지 않음
-        if (IsDelayActive) return;
+        if (IsDelayActive)
+        {
+            return;
+        }
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -54,6 +58,7 @@ public class Pause : MonoBehaviour
             if (!IsPause)
             {
                 PauseGame();
+                musicController.PauseMusic();
             }
             // 정지 상태이고 설정 창이 켜져 있는 경우 -> 설정창 꺼짐
             else if (IsPause && IsSettingOpened)
@@ -71,14 +76,9 @@ public class Pause : MonoBehaviour
         IsPause = true;
         IsResume = false;
 
-        if (uiAnimator != null)
+        if (uiAnimator != null && !IsDelayActive)
         {
-            if (IsDelayActive) return;
-
-            else
-            {
-                uiAnimator.SetTrigger(showTrigger);
-            }
+            uiAnimator.SetTrigger(showTrigger);
         }
 
         pauseSprite.enabled = true;
@@ -107,8 +107,8 @@ public class Pause : MonoBehaviour
 
     IEnumerator ResumeGameAfterDelay(float delay)
     {
-        IsResume = true;
         IsDelayActive = true;
+        IsResume = true;
 
         if (uiAnimator != null)
         {
@@ -118,6 +118,7 @@ public class Pause : MonoBehaviour
         yield return new WaitForSecondsRealtime(delay);
 
         Time.timeScale = 1;
+        musicController.ResumeMusic();
         IsPause = false;
         IsResume = false;
         IsDelayActive = false;
