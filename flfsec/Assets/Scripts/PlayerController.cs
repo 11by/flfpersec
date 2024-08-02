@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
         CheckGrounded();
 
         health = maxHealth;
+        dustParticle.Stop();
     }
 
     void Update()
@@ -58,7 +59,7 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("IsAirborne", !isGrounded);
 
         // 파티클 이펙트 제어
-        if (isGrounded && !isJumping)
+        if (isGrounded)
         {
             if (!dustParticle.isPlaying)
             {
@@ -138,11 +139,9 @@ public class PlayerController : MonoBehaviour
         // 공중에 떠 있는 시간 동안 대기
         yield return new WaitForSeconds(airTime);
 
+        isJumping = false;
         // 착지 확인 및 상태 업데이트
         LandOnClosestPlatformBelow();
-
-        // 점프 루틴 종료
-        isJumping = false;
     }
 
     void LandOnClosestPlatformBelow()
