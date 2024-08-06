@@ -394,6 +394,7 @@ MonoBehaviour:
   settingsMenu: {fileID: 540866460}
   settingsButton: {fileID: 1138178480}
   backButton: {fileID: 1690377256}
+  resumeButton: {fileID: 176772621}
 --- !u!4 &395957071
 Transform:
   m_ObjectHideFlags: 0
@@ -940,6 +941,7 @@ MonoBehaviour:
   settingsMenu: {fileID: 540866460}
   settingsButton: {fileID: 1138178480}
   backButton: {fileID: 1690377256}
+  resumeButton: {fileID: 176772621}
 --- !u!1 &608383087
 GameObject:
   m_ObjectHideFlags: 0

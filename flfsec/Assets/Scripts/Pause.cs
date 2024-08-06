@@ -4,8 +4,6 @@ using UnityEngine.UI;
 
 public class Pause : MonoBehaviour
 {
-    private SettingTab settingTab;
-
     private bool IsPause;
     private bool IsResume;
     private bool IsDelayActive;
@@ -16,13 +14,13 @@ public class Pause : MonoBehaviour
     public GameObject settingsMenu;     // 설정 메뉴 UI
     public Button settingsButton;       // 설정 메뉴 열기 버튼
     public Button backButton;           // 설정 메뉴 닫기 버튼
+    public Button resumeButton;         // 게임 재개 버튼
 
     private readonly string showTrigger = "doShow";
     private readonly string hideTrigger = "doHide";
 
     void Start()
     {
-        settingTab = FindObjectOfType<SettingTab>();
         IsSettingOpened = false;
         settingsMenu.SetActive(false);
         IsPause = false;
@@ -44,6 +42,16 @@ public class Pause : MonoBehaviour
         if (backButton != null)
         {
             backButton.onClick.AddListener(CloseSettings);
+        }
+
+        if (resumeButton != null)
+        {
+            resumeButton.onClick.AddListener(() => {
+                if (!IsDelayActive)
+                {
+                    StartCoroutine(ResumeGameAfterDelay(3.0f));
+                }
+            });
         }
     }
 
@@ -83,14 +91,6 @@ public class Pause : MonoBehaviour
 
         pauseSprite.enabled = true;
         Time.timeScale = 0;
-    }
-
-    public void ResumeGame()
-    {
-        if (IsPause && !IsResume)
-        {
-            StartCoroutine(ResumeGameAfterDelay(3.0f));
-        }
     }
 
     public void OpenSettings()
