@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     private bool isJumping; // 점프 중인지 여부 체크
     private float originalGravityScale; // 원래 중력 값 저장
     private Coroutine currentJumpRoutine; // 현재 진행 중인 점프 코루틴
+    private Pause pause;
 
     void Start()
     {
@@ -38,7 +39,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         // 점프 입력 체크
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && (pause == null || pause.IsPause == false))
         {
             if (isGrounded && !isJumping)
             {

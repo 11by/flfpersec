@@ -4,8 +4,7 @@ using UnityEngine.UI;
 
 public class Pause : MonoBehaviour
 {
-    private bool IsPause;
-    private bool IsResume;
+    public bool IsPause;
     private bool IsDelayActive;
     public bool IsSettingOpened;        // 설정 메뉴 표시 확인 변수
 
@@ -24,7 +23,6 @@ public class Pause : MonoBehaviour
         IsSettingOpened = false;
         settingsMenu.SetActive(false);
         IsPause = false;
-        IsResume = false;
         IsDelayActive = false;
         pauseSprite.enabled = false;
 
@@ -82,7 +80,6 @@ public class Pause : MonoBehaviour
     void PauseGame()
     {
         IsPause = true;
-        IsResume = false;
 
         if (uiAnimator != null)
         {
@@ -107,7 +104,6 @@ public class Pause : MonoBehaviour
 
     IEnumerator ResumeGameAfterDelay(float delay)
     {
-        IsResume = true;
         IsDelayActive = true;
 
         if (uiAnimator != null)
@@ -119,7 +115,6 @@ public class Pause : MonoBehaviour
 
         Time.timeScale = 1;
         IsPause = false;
-        IsResume = false;
         IsDelayActive = false;
         pauseSprite.enabled = false;
     }
