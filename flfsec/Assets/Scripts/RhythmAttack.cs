@@ -13,16 +13,17 @@ public class RhythmAttack : MonoBehaviour
     public GameObject hitParticlePrefab; // 파티클 프리팹 추가
 
     public string hitSoundEventPath;
-    private Pause pause;
+    private Pause pause; // Pause 스크립트 참조 변수
 
     void Start()
     {
-        Pause pause = FindObjectOfType<Pause>();
+        pause = FindObjectOfType<Pause>(); // Pause 스크립트 참조
     }
 
     void Update()
     {
-        if ((Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown(KeyCode.K) || Input.GetKeyDown(KeyCode.L)) && (pause == null || pause.IsPause == false))
+        // 일시정지 상태가 아닌 경우에만 공격 입력 처리
+        if ((Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown(KeyCode.K) || Input.GetKeyDown(KeyCode.L)) && (pause == null || !pause.IsPause))
         {
             Attack();
         }
