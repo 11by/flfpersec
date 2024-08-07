@@ -1,28 +1,28 @@
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using FMODUnity;
 
 public class RhythmAttack : MonoBehaviour
 {
     public float attackRange = 1f;
-    public Vector2 attackOffset;        // 공격 범위의 위치 오프셋
+    public Vector2 attackOffset; // 공격 범위의 위치 오프셋
     public LayerMask enemyLayer;
-    public Animator animator;           // Animator 추가
-    public PlayerController playerController;   // PlayerController 추가
-    public string hitSoundEventPath;    // FMOD 이벤트 경로
-    private Pause pause;        // 정지 기능 인스턴스
+    public Animator animator; // Animator 추가
+    public PlayerController playerController; // PlayerController 추가
+    public GameObject hitParticlePrefab; // 파티클 프리팹 추가
+
+    public string hitSoundEventPath;
+    private Pause pause;
 
     void Start()
     {
-        // 정지 시 공격하지 못하도록 하기 위해 Pause 인스턴스를 가져옴
-        pause = FindObjectOfType<Pause>();
+        Pause pause = FindObjectOfType<Pause>();
     }
 
     void Update()
     {
-        // 게임이 정지 상태가 아니며, D, F, K, L을 눌렀을 경우 -> 캐릭터 공격
-        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown(KeyCode.K) || Input.GetKeyDown(KeyCode.L) && (pause == null || pause.IsPause == false))
+        if ((Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.F) || Input.GetKeyDown(KeyCode.K) || Input.GetKeyDown(KeyCode.L)) && (pause == null || pause.IsPause == false))
         {
             Attack();
         }
@@ -85,7 +85,8 @@ public class RhythmAttack : MonoBehaviour
                 playerController.JumpDown();
             }
 
-            // 효과음 재생
+            // 파티클 이펙트 재생
+            Instantiate(hitParticlePrefab, enemy.transform.position, Quaternion.identity);
             PlayHitSound();
 
             CameraShake.instance.StartShake(0.1f);

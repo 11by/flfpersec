@@ -1060,6 +1060,14 @@ PrefabInstance:
       propertyPath: m_MaxParticleSize
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9062544818867178793, guid: 053e9b20643a9c848a005becbbb4a8be, type: 3}
+      propertyPath: ShapeModule.angle
+      value: 11.58
+      objectReference: {fileID: 0}
+    - target: {fileID: 9062544818867178793, guid: 053e9b20643a9c848a005becbbb4a8be, type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 0.0001
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1688,6 +1696,7 @@ MonoBehaviour:
   animator: {fileID: 975908911}
   playerController: {fileID: 975908905}
   hitParticlePrefab: {fileID: 802821369909321553, guid: 3cadfbc50faea234abd4d40ce95c757a, type: 3}
+  hitSoundEventPath: event:/bat_hit
 --- !u!95 &975908911
 Animator:
   serializedVersion: 5
