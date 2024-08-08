@@ -13,6 +13,7 @@ public class RhythmAttack : MonoBehaviour
     public GameObject hitParticlePrefab; // 파티클 프리팹 추가
 
     public string hitSoundEventPath;
+    public string swingSoundEventPath;
     private Pause pause; // Pause 스크립트 참조 변수
 
     void Start()
@@ -32,7 +33,7 @@ public class RhythmAttack : MonoBehaviour
     void Attack()
     {
         bool isAirborne = animator.GetBool("IsAirborne");
-
+        PlaySwingSound();
         // 애니메이션 트리거 설정
         if (isAirborne)
         {
@@ -100,6 +101,14 @@ public class RhythmAttack : MonoBehaviour
         if (!string.IsNullOrEmpty(hitSoundEventPath))
         {
             RuntimeManager.PlayOneShot(hitSoundEventPath);
+        }
+    }
+
+    void PlaySwingSound()
+    {
+        if (!string.IsNullOrEmpty(swingSoundEventPath))
+        {
+            RuntimeManager.PlayOneShot(swingSoundEventPath);
         }
     }
 
