@@ -18,6 +18,8 @@ public class Pause : MonoBehaviour
     private readonly string showTrigger = "doShow";
     private readonly string hideTrigger = "doHide";
 
+    private MusicController musicController;
+
     void Start()
     {
         IsSettingOpened = false;
@@ -25,6 +27,8 @@ public class Pause : MonoBehaviour
         IsPause = false;
         IsDelayActive = false;
         pauseSprite.enabled = false;
+
+        musicController = FindObjectOfType<MusicController>(); // MusicController 참조
 
         if (uiAnimator != null)
         {
@@ -88,6 +92,11 @@ public class Pause : MonoBehaviour
 
         pauseSprite.enabled = true;
         Time.timeScale = 0;
+
+        if (musicController != null)
+        {
+            musicController.PauseMusic(); // 배경음악 일시정지
+        }
     }
 
     public void OpenSettings()
@@ -117,5 +126,10 @@ public class Pause : MonoBehaviour
         IsPause = false;
         IsDelayActive = false;
         pauseSprite.enabled = false;
+
+        if (musicController != null)
+        {
+            musicController.ResumeMusic(); // 배경음악 재개
+        }
     }
 }
