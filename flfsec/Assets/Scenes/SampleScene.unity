@@ -1689,7 +1689,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 2.88
-  attackOffset: {x: -1.19, y: 1.14}
+  attackOffset: {x: -1.24, y: 1.14}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -1697,6 +1697,7 @@ MonoBehaviour:
   playerController: {fileID: 975908905}
   hitParticlePrefab: {fileID: 802821369909321553, guid: 3cadfbc50faea234abd4d40ce95c757a, type: 3}
   hitSoundEventPath: event:/bat_hit
+  swingSoundEventPath: event:/bat_swing
 --- !u!95 &975908911
 Animator:
   serializedVersion: 5
