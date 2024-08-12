@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     public int maxHealth = 3; // 플레이어의 목숨
     public Animator animator;
     public ParticleSystem dustParticle;
+    public GameObject DeathBG;
     public GameObject DeathUI;
 
     bool isDie = false;
@@ -24,6 +25,7 @@ public class PlayerController : MonoBehaviour
     private float originalGravityScale; // 원래 중력 값 저장
     private Coroutine currentJumpRoutine; // 현재 진행 중인 점프 코루틴
     private Pause pause; // Pause 스크립트 참조
+    private float timeSlowFactor = 0.05f; // 시간 감속 비율
 
     void Start()
     {
@@ -34,6 +36,7 @@ public class PlayerController : MonoBehaviour
         health = maxHealth;
         dustParticle.Stop();
         pause = FindObjectOfType<Pause>(); // Pause 스크립트 참조
+        DeathUI.SetActive(false);
     }
 
     void Update()
@@ -103,10 +106,38 @@ public class PlayerController : MonoBehaviour
     void Die()
     {
         isDie = true;
-
-        rb.velocity = Vector2.zero;
         animator.Play("Die");
-        StartCoroutine(ShowDeathUI());
+
+        // 플랫폼 스크롤 서서히 멈추기
+        StartCoroutine(SlowDownPlatformScrolling());
+
+        StartCoroutine(SlowDownTimeAndShowDeathUI());
+    }
+
+    IEnumerator SlowDownPlatformScrolling()
+    {
+        PlatformScroller[] platformScrollers = FindObjectsOfType<PlatformScroller>();
+        float elapsedTime = 0f;
+        float duration = 1f; // 서서히 멈추는 데 걸리는 시간
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsedTime / duration);
+
+            foreach (PlatformScroller scroller in platformScrollers)
+            {
+                scroller.scrollSpeed = Mathf.Lerp(scroller.scrollSpeed, 0f, t);
+            }
+
+            yield return null;
+        }
+
+        // 최종적으로 속도를 0으로 설정
+        foreach (PlatformScroller scroller in platformScrollers)
+        {
+            scroller.scrollSpeed = 0f;
+        }
     }
 
     void CheckGrounded()
@@ -164,7 +195,10 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            rb.gravityScale = 100;
             isGrounded = false;
+
+            Die();
         }
 
         isJumping = false;
@@ -174,14 +208,25 @@ public class PlayerController : MonoBehaviour
     {
         if (collider.CompareTag("Dead"))
         {
+            rb.velocity = Vector2.zero;
             Die();
-            Time.timeScale = 0f;
         }
     }
 
-    IEnumerator ShowDeathUI()
+    IEnumerator SlowDownTimeAndShowDeathUI()
     {
-        yield return new WaitForSecondsRealtime(1f);
+        float elapsedTime = 0f;
+        float duration = 1f; // 1초 동안 시간 느려짐
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.unscaledDeltaTime;
+            float t = Mathf.Clamp01(elapsedTime / duration);
+            Time.timeScale = Mathf.Lerp(1f, timeSlowFactor, t); // 시간 점차 줄이기
+            yield return null; // 한 프레임 기다림 (Time.unscaledDeltaTime 사용)
+        }
+
+        Time.timeScale = 0; // 완전히 멈춤
         DeathUI.SetActive(true);
     }
 
