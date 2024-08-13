@@ -1806,13 +1806,16 @@ MonoBehaviour:
     m_Bits: 128
   animator: {fileID: 975908911}
   playerController: {fileID: 975908905}
-  hitParticlePrefab: {fileID: 802821369909321553, guid: 3cadfbc50faea234abd4d40ce95c757a, type: 3}
+  perfectParticlePrefab: {fileID: 802821369909321553, guid: 3cadfbc50faea234abd4d40ce95c757a, type: 3}
+  greatParticlePrefab: {fileID: 802821369909321553, guid: effb0e86aca493447b06782d5df9f413, type: 3}
+  goodParticlePrefab: {fileID: 802821369909321553, guid: 3efa11bbfd1b6db42b2831a433922dba, type: 3}
+  poorParticlePrefab: {fileID: 802821369909321553, guid: 98c263dd75dded94c9636c0879a8ad5b, type: 3}
   hitSoundEventPath: event:/bat_hit
   swingSoundEventPath: event:/bat_swing
-  perfectRange: 0.15
+  perfectRange: 0.5
   greatRange: 1
   goodRange: 1.5
-  missRange: 2
+  poorRange: 2
   judgementOffset: {x: 0, y: 0}
 --- !u!95 &975908911
 Animator:

@@ -10,7 +10,12 @@ public class RhythmAttack : MonoBehaviour
     public LayerMask enemyLayer;
     public Animator animator; // Animator 추가
     public PlayerController playerController; // PlayerController 추가
-    public GameObject hitParticlePrefab; // 파티클 프리팹 추가
+
+    [Header("Particle Effects")]
+    public GameObject perfectParticlePrefab; // Perfect 판정 파티클 프리팹
+    public GameObject greatParticlePrefab;   // Great 판정 파티클 프리팹
+    public GameObject goodParticlePrefab;    // Good 판정 파티클 프리팹
+    public GameObject poorParticlePrefab;    // Poor 판정 파티클 프리팹
 
     public string hitSoundEventPath;
     public string swingSoundEventPath;
@@ -21,7 +26,7 @@ public class RhythmAttack : MonoBehaviour
     public float perfectRange = 0.5f;
     public float greatRange = 1.0f;
     public float goodRange = 1.5f;
-    public float missRange = 2.0f;
+    public float poorRange = 2.0f;
 
     [Header("Judgement Offset")]
     public Vector2 judgementOffset = Vector2.zero; // 판정 범위의 중심 오프셋
@@ -66,29 +71,29 @@ public class RhythmAttack : MonoBehaviour
 
         // 공격 범위 내의 적을 감지
         Vector2 attackPosition = (Vector2)transform.position + attackOffset + judgementOffset;
-        RaycastHit2D[] hits = Physics2D.RaycastAll(attackPosition, Vector2.right, attackRange, enemyLayer);
+        Collider2D[] hits = Physics2D.OverlapCircleAll(attackPosition, attackRange, enemyLayer);
 
         // 가장 왼쪽에 있는 적을 찾음
-        RaycastHit2D leftmostHit = new RaycastHit2D();
+        Collider2D leftmostHit = null;
         float leftmostX = Mathf.Infinity;
 
-        foreach (RaycastHit2D hit in hits)
+        foreach (Collider2D hit in hits)
         {
-            if (hit.collider != null && hit.collider.CompareTag("Enemy"))
+            if (hit != null && hit.CompareTag("Enemy"))
             {
-                if (hit.point.x < leftmostX)
+                if (hit.transform.position.x < leftmostX)
                 {
-                    leftmostX = hit.point.x;
+                    leftmostX = hit.transform.position.x;
                     leftmostHit = hit;
                 }
             }
         }
 
         // 가장 왼쪽에 있는 적 처리
-        if (leftmostHit.collider != null)
+        if (leftmostHit != null)
         {
-            GameObject enemy = leftmostHit.collider.gameObject;
-            float distanceToPlayer = Mathf.Abs(leftmostHit.point.x - transform.position.x);
+            GameObject enemy = leftmostHit.gameObject;
+            float distanceToPlayer = Vector2.Distance(leftmostHit.transform.position, transform.position);
 
             // 적의 이름에 따른 플레이어의 동작 설정
             if (enemy.name.Contains("Up"))
@@ -100,39 +105,38 @@ public class RhythmAttack : MonoBehaviour
                 playerController.JumpDown();
             }
 
-            // 파티클 이펙트 재생
-            Instantiate(hitParticlePrefab, enemy.transform.position, Quaternion.identity);
-            PlayHitSound();
-
-            CameraShake.instance.StartShake(0.1f);
-
-            // 판정에 따른 점수 처리
+            // 판정에 따른 점수 처리 및 파티클 이펙트 재생
             if (distanceToPlayer <= perfectRange)
             {
                 scoreManager.AddScore(ScoreManager.Judgement.Perfect);
-                Debug.Log("P");
+                Instantiate(perfectParticlePrefab, enemy.transform.position, Quaternion.identity); // Perfect 파티클
+                Debug.Log("Perfect");
             }
             else if (distanceToPlayer <= greatRange)
             {
                 scoreManager.AddScore(ScoreManager.Judgement.Great);
-                Debug.Log("G");
+                Instantiate(greatParticlePrefab, enemy.transform.position, Quaternion.identity); // Great 파티클
+                Debug.Log("Great");
             }
             else if (distanceToPlayer <= goodRange)
             {
                 scoreManager.AddScore(ScoreManager.Judgement.Good);
-                Debug.Log("O");
+                Instantiate(goodParticlePrefab, enemy.transform.position, Quaternion.identity); // Good 파티클
+                Debug.Log("Good");
             }
-            else if (distanceToPlayer <= missRange)
+            else if (distanceToPlayer <= poorRange)
             {
                 scoreManager.AddScore(ScoreManager.Judgement.Poor);
-                Debug.Log("R");
+                Instantiate(poorParticlePrefab, enemy.transform.position, Quaternion.identity); // Poor 파티클
+                Debug.Log("Poor");
             }
             else
             {
                 scoreManager.AddScore(ScoreManager.Judgement.Miss);
-                Debug.Log("M");
             }
 
+            PlayHitSound();
+            CameraShake.instance.StartShake(0.1f);
             Destroy(enemy);
         }
         else
@@ -161,8 +165,11 @@ public class RhythmAttack : MonoBehaviour
     // 유니티 에디터에서 공격 범위를 시각적으로 표시
     void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.red;
         Vector2 attackPosition = (Vector2)transform.position + attackOffset + judgementOffset;
+
+        // 공격 범위 (원형)
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(attackPosition, attackRange);
 
         // Perfect Range
         Gizmos.color = Color.green;
@@ -178,6 +185,6 @@ public class RhythmAttack : MonoBehaviour
 
         // Miss Range
         Gizmos.color = Color.gray;
-        Gizmos.DrawWireSphere(attackPosition, missRange);
+        Gizmos.DrawWireSphere(attackPosition, poorRange);
     }
 }
