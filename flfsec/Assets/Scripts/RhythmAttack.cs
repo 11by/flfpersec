@@ -23,10 +23,10 @@ public class RhythmAttack : MonoBehaviour
     private ScoreManager scoreManager; // ScoreManager 참조 변수
 
     [Header("Judgement Ranges")]
-    public float perfectRange = 0.5f;
-    public float greatRange = 1.0f;
-    public float goodRange = 1.5f;
-    public float poorRange = 2.0f;
+    float perfectRange = 0.5f;
+    float greatRange = 1.0f;
+    float goodRange = 1.5f;
+    float poorRange = 2.0f;
 
     [Header("Judgement Offset")]
     public Vector2 judgementOffset = Vector2.zero; // 판정 범위의 중심 오프셋
@@ -106,6 +106,7 @@ public class RhythmAttack : MonoBehaviour
             }
 
             // 판정에 따른 점수 처리 및 파티클 이펙트 재생
+            distanceToPlayer -= 1.4f;
             if (distanceToPlayer <= perfectRange)
             {
                 scoreManager.AddScore(ScoreManager.Judgement.Perfect);
