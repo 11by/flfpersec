@@ -15,10 +15,21 @@ public class RhythmAttack : MonoBehaviour
     public string hitSoundEventPath;
     public string swingSoundEventPath;
     private Pause pause; // Pause 스크립트 참조 변수
+    private ScoreManager scoreManager; // ScoreManager 참조 변수
+
+    [Header("Judgement Ranges")]
+    public float perfectRange = 0.5f;
+    public float greatRange = 1.0f;
+    public float goodRange = 1.5f;
+    public float missRange = 2.0f;
+
+    [Header("Judgement Offset")]
+    public Vector2 judgementOffset = Vector2.zero; // 판정 범위의 중심 오프셋
 
     void Start()
     {
         pause = FindObjectOfType<Pause>(); // Pause 스크립트 참조
+        scoreManager = FindObjectOfType<ScoreManager>(); // ScoreManager 스크립트 참조
     }
 
     void Update()
@@ -34,6 +45,7 @@ public class RhythmAttack : MonoBehaviour
     {
         bool isAirborne = animator.GetBool("IsAirborne");
         PlaySwingSound();
+
         // 애니메이션 트리거 설정
         if (isAirborne)
         {
@@ -53,7 +65,7 @@ public class RhythmAttack : MonoBehaviour
         }
 
         // 공격 범위 내의 적을 감지
-        Vector2 attackPosition = (Vector2)transform.position + attackOffset;
+        Vector2 attackPosition = (Vector2)transform.position + attackOffset + judgementOffset;
         RaycastHit2D[] hits = Physics2D.RaycastAll(attackPosition, Vector2.right, attackRange, enemyLayer);
 
         // 가장 왼쪽에 있는 적을 찾음
@@ -76,6 +88,7 @@ public class RhythmAttack : MonoBehaviour
         if (leftmostHit.collider != null)
         {
             GameObject enemy = leftmostHit.collider.gameObject;
+            float distanceToPlayer = Mathf.Abs(leftmostHit.point.x - transform.position.x);
 
             // 적의 이름에 따른 플레이어의 동작 설정
             if (enemy.name.Contains("Up"))
@@ -92,7 +105,40 @@ public class RhythmAttack : MonoBehaviour
             PlayHitSound();
 
             CameraShake.instance.StartShake(0.1f);
+
+            // 판정에 따른 점수 처리
+            if (distanceToPlayer <= perfectRange)
+            {
+                scoreManager.AddScore(ScoreManager.Judgement.Perfect);
+                Debug.Log("P");
+            }
+            else if (distanceToPlayer <= greatRange)
+            {
+                scoreManager.AddScore(ScoreManager.Judgement.Great);
+                Debug.Log("G");
+            }
+            else if (distanceToPlayer <= goodRange)
+            {
+                scoreManager.AddScore(ScoreManager.Judgement.Good);
+                Debug.Log("O");
+            }
+            else if (distanceToPlayer <= missRange)
+            {
+                scoreManager.AddScore(ScoreManager.Judgement.Poor);
+                Debug.Log("R");
+            }
+            else
+            {
+                scoreManager.AddScore(ScoreManager.Judgement.Miss);
+                Debug.Log("M");
+            }
+
             Destroy(enemy);
+        }
+        else
+        {
+            // 적을 공격하지 못했을 경우 Miss 처리
+            scoreManager.AddScore(ScoreManager.Judgement.Miss);
         }
     }
 
@@ -116,7 +162,22 @@ public class RhythmAttack : MonoBehaviour
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Vector2 attackPosition = (Vector2)transform.position + attackOffset;
-        Gizmos.DrawLine(attackPosition, attackPosition + Vector2.right * attackRange);
+        Vector2 attackPosition = (Vector2)transform.position + attackOffset + judgementOffset;
+
+        // Perfect Range
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(attackPosition, perfectRange);
+
+        // Great Range
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(attackPosition, greatRange);
+
+        // Good Range
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(attackPosition, goodRange);
+
+        // Miss Range
+        Gizmos.color = Color.gray;
+        Gizmos.DrawWireSphere(attackPosition, missRange);
     }
 }
