@@ -56,6 +56,11 @@ public class EnemyManager : MonoBehaviour
             }
         }
     }
+
+    public int GetTotalEnemies()
+    {
+        return enemyCount;
+    }
 }
 
 [System.Serializable]

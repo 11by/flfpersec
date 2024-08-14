@@ -6,61 +6,69 @@ public class ScoreManager : MonoBehaviour
 {
     public enum Judgement { Perfect, Great, Good, Poor, Miss }
 
-    public int perfectScore = 1000000; // 모든 판정을 Perfect로 내었을 때 100만점
-    private int currentScore = 0;
-
     private int perfectCount = 0;
     private int greatCount = 0;
     private int goodCount = 0;
     private int poorCount = 0;
     private int missCount = 0;
 
-    private int perfectPoints;
-    private int greatPoints;
-    private int goodPoints;
-    private int poorPoints;
+    private int totalScore = 0;
+    private int scorePerNote = 0;
+    private EnemyManager enemyManager;
 
     void Start()
     {
-        perfectPoints = perfectScore;
-        greatPoints = perfectPoints / 2;
-        goodPoints = perfectPoints / 3;
-        poorPoints = perfectPoints / 10;
+        enemyManager = FindObjectOfType<EnemyManager>();
+
+        // 노트의 총 수를 가져와서 노트당 점수를 계산합니다.
+        int totalEnemies = enemyManager.GetTotalEnemies();
+        if (totalEnemies > 0)
+        {
+            scorePerNote = 1000000 / totalEnemies;
+        }
+        else
+        {
+            Debug.LogWarning("No enemies found. Score per note is set to 0.");
+            scorePerNote = 0;
+        }
     }
 
     public void AddScore(Judgement judgement)
     {
+        int judgementScore = 0;
+
+        // 판정별 배율에 따라 점수 계산
         switch (judgement)
         {
             case Judgement.Perfect:
-                currentScore += perfectPoints;
                 perfectCount++;
+                judgementScore = Mathf.RoundToInt(scorePerNote * 1.0f); // 100%
                 break;
             case Judgement.Great:
-                currentScore += greatPoints;
                 greatCount++;
+                judgementScore = Mathf.RoundToInt(scorePerNote * 0.5f); // 50%
                 break;
             case Judgement.Good:
-                currentScore += goodPoints;
                 goodCount++;
+                judgementScore = Mathf.RoundToInt(scorePerNote * 0.3f); // 30%
                 break;
             case Judgement.Poor:
-                currentScore += poorPoints;
                 poorCount++;
+                judgementScore = Mathf.RoundToInt(scorePerNote * 0.01f); // 1%
                 break;
             case Judgement.Miss:
                 missCount++;
+                judgementScore = 0; // 0%
                 break;
         }
+
+        totalScore += judgementScore;
     }
 
-    public void ShowResults()
-    {
-        Debug.Log("Final Score: " + currentScore);
-        Debug.Log("Perfect: " + perfectCount);
-        Debug.Log("Great: " + greatCount);
-        Debug.Log("Good: " + goodCount);
-        Debug.Log("Poor: " + poorCount);
-        Debug.Log("Miss: " + missCount);
-    }
+    public int GetPerfectCount() { return perfectCount; }
+    public int GetGreatCount() { return greatCount; }
+    public int GetGoodCount() { return goodCount; }
+    public int GetPoorCount() { return poorCount; }
+    public int GetMissCount() { return missCount; }
+    public int GetTotalScore() { return totalScore; }
 }
