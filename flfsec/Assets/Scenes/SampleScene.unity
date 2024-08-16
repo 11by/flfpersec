@@ -1708,7 +1708,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpHeight: 2.4
-  airTime: 1
+  airTime: 1.1
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -1812,10 +1812,6 @@ MonoBehaviour:
   poorParticlePrefab: {fileID: 802821369909321553, guid: 98c263dd75dded94c9636c0879a8ad5b, type: 3}
   hitSoundEventPath: event:/bat_hit
   swingSoundEventPath: event:/bat_swing
-  perfectRange: 0.5
-  greatRange: 1
-  goodRange: 1.5
-  poorRange: 2
   judgementOffset: {x: 0, y: 0}
 --- !u!95 &975908911
 Animator:
@@ -1967,7 +1963,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 790dbf8463e482144b182b09b40fcc36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  perfectScore: 1000000
 --- !u!1 &1020251492
 GameObject:
   m_ObjectHideFlags: 0
