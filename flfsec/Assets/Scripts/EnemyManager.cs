@@ -15,11 +15,13 @@ public class EnemyManager : MonoBehaviour
     private float beatInterval;
     private int numberOfBeats;
     private int enemyCount = 0;
+    private ScoreManager scoreManager;
 
     void Start()
     {
         beatInterval = 60.0f / beatsPerMinute; // 한 비트의 시간 (초)
         numberOfBeats = Mathf.FloorToInt(durationInSeconds / beatInterval); // 게임 전체에서의 총 박자 수
+        scoreManager = FindObjectOfType<ScoreManager>();
 
         for (int i = 0; i < numberOfBeats; i++)
         {
