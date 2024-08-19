@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;  // UI 요소에 접근하기 위해 추가
 
 public class ScoreManager : MonoBehaviour
 {
@@ -15,6 +16,14 @@ public class ScoreManager : MonoBehaviour
     private int totalScore = 0;
     private int scorePerNote = 0;
     private EnemyManager enemyManager;
+
+    // UI 텍스트 참조
+    public Text perfectText;
+    public Text greatText;
+    public Text goodText;
+    public Text poorText;
+    public Text missText;
+    public Text scoreText;
 
     void Start()
     {
@@ -31,6 +40,8 @@ public class ScoreManager : MonoBehaviour
             Debug.LogWarning("No enemies found. Score per note is set to 0.");
             scorePerNote = 0;
         }
+
+        UpdateUI();
     }
 
     public void AddScore(Judgement judgement)
@@ -63,6 +74,18 @@ public class ScoreManager : MonoBehaviour
         }
 
         totalScore += judgementScore;
+        UpdateUI(); // UI 업데이트
+    }
+
+    // UI를 최신 상태로 업데이트
+    void UpdateUI()
+    {
+        perfectText.text = "Perfect: " + perfectCount;
+        greatText.text = "Great: " + greatCount;
+        goodText.text = "Good: " + goodCount;
+        poorText.text = "Poor: " + poorCount;
+        missText.text = "Miss: " + missCount;
+        scoreText.text = "Score: " + totalScore;
     }
 
     public int GetPerfectCount() { return perfectCount; }

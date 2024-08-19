@@ -59,6 +59,7 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
+    // 적의 총 수 반환
     public int GetTotalEnemies()
     {
         return enemyCount;
