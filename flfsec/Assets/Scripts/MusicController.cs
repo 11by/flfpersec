@@ -23,9 +23,14 @@ public class MusicController : MonoBehaviour
         musicInstance.setPaused(false);
     }
 
-    void OnDestroy()
+    public void StopMusic() // 명확한 이름의 메서드 추가
     {
         musicInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
         musicInstance.release();
+    }
+
+    public void OnDestroy()
+    {
+        StopMusic(); // OnDestroy에서 StopMusic을 호출
     }
 }

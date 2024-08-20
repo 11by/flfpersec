@@ -1,3 +1,4 @@
+using FMODUnity;
 using System;
 using System.Collections;
 using Unity.VisualScripting;
@@ -15,6 +16,8 @@ public class PlayerController : MonoBehaviour
     public ParticleSystem dustParticle;
     public GameObject DeathBG;
     public GameObject DeathUI;
+    public string jumpSound;
+    public string landSound;
 
     bool isDie = false;
     int health = 3;
@@ -26,6 +29,7 @@ public class PlayerController : MonoBehaviour
     private Coroutine currentJumpRoutine; // 현재 진행 중인 점프 코루틴
     private Pause pause; // Pause 스크립트 참조
     private float timeSlowFactor = 0.05f; // 시간 감속 비율
+    private MusicController musiccontroller;
 
     void Start()
     {
@@ -112,6 +116,10 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(SlowDownPlatformScrolling());
 
         StartCoroutine(SlowDownTimeAndShowDeathUI());
+        if (musiccontroller != null)
+        {
+            musiccontroller.StopMusic();
+        }
     }
 
     IEnumerator SlowDownPlatformScrolling()
@@ -161,6 +169,7 @@ public class PlayerController : MonoBehaviour
         animator.SetTrigger("Jump");
 
         // 점프 시작
+        PlayjumpSound();
         rb.gravityScale = 0; // 중력 값 0으로 설정
         Vector3 startPosition = transform.position;
         Vector3 peakPosition = new Vector3(startPosition.x, startPosition.y + height, startPosition.z);
@@ -191,6 +200,7 @@ public class PlayerController : MonoBehaviour
             transform.position = new Vector3(transform.position.x, hit.point.y, transform.position.z);
             isGrounded = true;
             rb.gravityScale = originalGravityScale;
+            PlaylandSound();
             animator.Play("Land");
         }
         else
@@ -261,5 +271,21 @@ public class PlayerController : MonoBehaviour
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, Mathf.Infinity, groundLayer);
         return hit.collider != null && hit.collider.CompareTag("Platform");
+    }
+
+    void PlayjumpSound()
+    {
+        if (!string.IsNullOrEmpty(jumpSound))
+        {
+            RuntimeManager.PlayOneShot(jumpSound);
+        }
+    }
+
+    void PlaylandSound()
+    {
+        if (!string.IsNullOrEmpty(landSound))
+        {
+            RuntimeManager.PlayOneShot(landSound);
+        }
     }
 }

@@ -435,7 +435,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -467.27, y: 143}
+  m_AnchoredPosition: {x: 134.85, y: -32.140015}
   m_SizeDelta: {x: 757.93, y: 448.04}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &337993395
@@ -486,10 +486,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -919,7 +919,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -471.07, y: -118}
+  m_AnchoredPosition: {x: 131.04999, y: -293.14}
   m_SizeDelta: {x: 750.33, y: 417.64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &519420028
@@ -1670,9 +1670,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   platformSpawner: {fileID: 1620809270}
   scrollSpeed: 10.5
-  beatsPerMinute: 118.5
-  durationInSeconds: 60
-  platformPattern: 010101010001010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101
+  beatsPerMinute: 142.7
+  durationInSeconds: 100
+  platformPattern: 010101010101010101010101010101010100010101010101010001010101010101010101000101010101010001010101010101000101010101010100010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101
   progressBarController: {fileID: 0}
   player: {fileID: 975908908}
 --- !u!1 &848227972
@@ -1866,7 +1866,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpHeight: 2.4
-  airTime: 1.1
+  airTime: 0.84
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -1877,6 +1877,8 @@ MonoBehaviour:
   dustParticle: {fileID: 1274250439}
   DeathBG: {fileID: 1888650683}
   DeathUI: {fileID: 337993395}
+  jumpSound: event:/jumping
+  landSound: event:/landing
 --- !u!212 &975908907
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1958,7 +1960,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 2
-  attackOffset: {x: 0.1, y: 1.38}
+  attackOffset: {x: 0.09, y: 1.37}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -2158,8 +2160,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawner: {fileID: 608383088}
   scrollSpeed: 10.5
-  beatsPerMinute: 118.5
-  durationInSeconds: 60
+  beatsPerMinute: 142.7
+  durationInSeconds: 100
   enemyPattern:
   - spawn: 0
     type: 
@@ -2188,55 +2190,13 @@ MonoBehaviour:
   - spawn: 0
     type: 
     yPosition: 0
-  - spawn: 1
-    type: Up
-    yPosition: 0
-  - spawn: 1
-    type: 
-    yPosition: 1
-  - spawn: 1
-    type: Up
-    yPosition: 1
-  - spawn: 1
-    type: Down
-    yPosition: 2
-  - spawn: 1
-    type: Up
-    yPosition: 1
-  - spawn: 1
-    type: Down
-    yPosition: 2
-  - spawn: 1
-    type: Down
-    yPosition: 1
-  - spawn: 1
-    type: Up
-    yPosition: 0
-  - spawn: 1
-    type: Up
-    yPosition: 1
-  - spawn: 1
-    type: Up
-    yPosition: 2
-  - spawn: 1
-    type: Up
-    yPosition: 3
-  - spawn: 1
-    type: Up
-    yPosition: 4
-  - spawn: 1
-    type: 
-    yPosition: 5
-  - spawn: 1
-    type: Down
-    yPosition: 5
-  - spawn: 1
-    type: 
-    yPosition: 4
   - spawn: 0
     type: 
     yPosition: 0
-  - spawn: 1
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
     type: 
     yPosition: 0
   - spawn: 0
@@ -2248,7 +2208,13 @@ MonoBehaviour:
   - spawn: 0
     type: 
     yPosition: 0
-  - spawn: 1
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
     type: 
     yPosition: 0
   - spawn: 0
@@ -2260,7 +2226,13 @@ MonoBehaviour:
   - spawn: 0
     type: 
     yPosition: 0
-  - spawn: 1
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
     type: 
     yPosition: 0
   - spawn: 0
@@ -2272,7 +2244,19 @@ MonoBehaviour:
   - spawn: 0
     type: 
     yPosition: 0
-  - spawn: 1
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
     type: 
     yPosition: 0
   - spawn: 0
@@ -2296,28 +2280,13 @@ MonoBehaviour:
   - spawn: 1
     type: 
     yPosition: 0
-  - spawn: 0
-    type: 
-    yPosition: 0
-  - spawn: 0
-    type: 
-    yPosition: 0
-  - spawn: 0
+  - spawn: 1
     type: 
     yPosition: 0
   - spawn: 1
     type: 
     yPosition: 0
   - spawn: 0
-    type: 
-    yPosition: 0
-  - spawn: 0
-    type: 
-    yPosition: 0
-  - spawn: 0
-    type: 
-    yPosition: 0
-  - spawn: 1
     type: 
     yPosition: 0
   - spawn: 0
@@ -2329,11 +2298,404 @@ MonoBehaviour:
   - spawn: 0
     type: 
     yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
   - spawn: 1
     type: 
     yPosition: 0
   - spawn: 1
-    type: Up
+    type: 
+    yPosition: 0
+  - spawn: 1
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 1
+    type: 
+    yPosition: 1
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 1
+    type: 
+    yPosition: 0
+  - spawn: 1
+    type: 
+    yPosition: 0
+  - spawn: 1
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 1
+    type: 
+    yPosition: 1
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
+    yPosition: 0
+  - spawn: 0
+    type: 
     yPosition: 0
   - spawn: 0
     type: 
@@ -2523,6 +2885,7 @@ MonoBehaviour:
     yPosition: 0
   jumpHeight: 2.4
   player: {fileID: 975908908}
+  enemyCount: 0
 --- !u!4 &1020251494
 Transform:
   m_ObjectHideFlags: 0
@@ -2969,7 +3332,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -501.47, y: -134.07}
+  m_AnchoredPosition: {x: 100.649994, y: -309.21002}
   m_SizeDelta: {x: 689.52, y: 268.16}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!4 &1274250437 stripped
@@ -3368,7 +3731,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -525.54, y: 96.13}
+  m_AnchoredPosition: {x: 76.58002, y: -79.01001}
   m_SizeDelta: {x: 641.38, y: 354.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1524053814
@@ -3448,6 +3811,81 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1605020288
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1605020289}
+  - component: {fileID: 1605020291}
+  - component: {fileID: 1605020290}
+  m_Layer: 5
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1605020289
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1605020288}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1613254339}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1920, y: 1080}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1605020290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1605020288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.46226418, g: 0.46226418, b: 0.46226418, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 4e99825ff3fb71f40998dfc0283af8d6, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1605020291
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1605020288}
+  m_CullTransparentMesh: 1
 --- !u!1 &1613254334
 GameObject:
   m_ObjectHideFlags: 0
@@ -3461,6 +3899,7 @@ GameObject:
   - component: {fileID: 1613254337}
   - component: {fileID: 1613254336}
   - component: {fileID: 1613254335}
+  - component: {fileID: 1613254340}
   m_Layer: 5
   m_Name: ScoreCanvas
   m_TagString: Untagged
@@ -3547,7 +3986,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 8
   m_TargetDisplay: 0
 --- !u!224 &1613254339
 RectTransform:
@@ -3561,6 +4000,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1605020289}
   - {fileID: 1754624787}
   - {fileID: 279099639}
   - {fileID: 1382217747}
@@ -3574,6 +4014,26 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1613254340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1613254334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bce1bb257f58754eb2ab88436361e00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreManager: {fileID: 1613254335}
+  resultPanel: {fileID: 1613254334}
+  resultPerfectText: {fileID: 1754624785}
+  resultGreatText: {fileID: 279099637}
+  resultGoodText: {fileID: 1382217745}
+  resultPoorText: {fileID: 1889342724}
+  resultMissText: {fileID: 494708327}
+  resultScoreText: {fileID: 1212242033}
 --- !u!1 &1620809268
 GameObject:
   m_ObjectHideFlags: 0
@@ -4071,7 +4531,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -463.12, y: 231.14}
+  m_AnchoredPosition: {x: 139, y: 56}
   m_SizeDelta: {x: 766.24, y: 462.27}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1759025657
@@ -4379,7 +4839,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -531.87, y: 42}
+  m_AnchoredPosition: {x: 70.25, y: -133.14001}
   m_SizeDelta: {x: 628.71, y: 280.82}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2028508224

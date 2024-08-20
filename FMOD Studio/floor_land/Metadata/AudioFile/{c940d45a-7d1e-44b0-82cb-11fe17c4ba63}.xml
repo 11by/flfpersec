@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{c940d45a-7d1e-44b0-82cb-11fe17c4ba63}">
+		<property name="assetPath">
+			<value>Sunset Dreams.mp3</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>113.44799999999999</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{64c95b89-2bad-4999-9bee-b175b79688cc}</destination>
+		</relationship>
+	</object>
+</objects>

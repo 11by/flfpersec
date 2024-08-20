@@ -14,7 +14,7 @@ public class EnemyManager : MonoBehaviour
 
     private float beatInterval;
     private int numberOfBeats;
-    private int enemyCount = 0;
+    public int enemyCount = 0;
     private ScoreManager scoreManager;
 
     void Start()

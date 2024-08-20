@@ -15,10 +15,10 @@ MonoBehaviour:
   Path: ../FMOD Studio/floor_land/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638563974938524443
+  lastModified: 638597775719463862
   FileSizes:
   - Name: Desktop
-    Value: 956
+    Value: 1032
   Exists: 1
 --- !u!114 &-3843657290567902283
 MonoBehaviour:
@@ -89,7 +89,7 @@ MonoBehaviour:
   Path: ../FMOD Studio/floor_land/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638563974938494112
+  lastModified: 638597775719448691
   FileSizes:
   - Name: Desktop
     Value: 1036
@@ -120,7 +120,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 30093
+  Length: 101285
 --- !u!114 &-1321064477869905540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,10 +136,10 @@ MonoBehaviour:
   Path: ../FMOD Studio/floor_land/Build/Desktop/sound_effects.bank
   Name: sound_effects
   StudioPath: bank:/sound_effects
-  lastModified: 638581909242036228
+  lastModified: 638597775719706282
   FileSizes:
   - Name: Desktop
-    Value: 367712
+    Value: 1556800
   Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -162,12 +162,14 @@ MonoBehaviour:
   - {fileID: -3131000779269280542}
   - {fileID: 3585234897678969266}
   - {fileID: -1587650096882358128}
+  - {fileID: 8674301600090051632}
+  - {fileID: 3819405281203678425}
   EditorParameters: []
   MasterBanks:
   - {fileID: -2773872294557387259}
   StringsBanks:
   - {fileID: -7523392399716117397}
-  cacheTime: 638581909242036228
+  cacheTime: 638597775719706282
   cacheVersion: 131618
 --- !u!114 &3585234897678969266
 MonoBehaviour:
@@ -196,3 +198,57 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 2228
+--- !u!114 &3819405281203678425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/landing
+  m_EditorClassIdentifier: 
+  Path: event:/landing
+  Guid:
+    Data1: -1324183842
+    Data2: 1088237845
+    Data3: 387266739
+    Data4: -1240736737
+  Banks:
+  - {fileID: -1321064477869905540}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 350
+--- !u!114 &8674301600090051632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/jumping
+  m_EditorClassIdentifier: 
+  Path: event:/jumping
+  Guid:
+    Data1: -1147929156
+    Data2: 1131878420
+    Data3: -178351979
+    Data4: -1587816059
+  Banks:
+  - {fileID: -1321064477869905540}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1760
