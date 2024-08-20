@@ -1938,7 +1938,7 @@ Transform:
   m_GameObject: {fileID: 975908904}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.6800003, y: -3.37, z: 0}
+  m_LocalPosition: {x: -5.6800003, y: -3.3, z: 0}
   m_LocalScale: {x: 1.6983, y: 1.6983, z: 1.6983}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2121,12 +2121,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 790dbf8463e482144b182b09b40fcc36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  perfectText: {fileID: 0}
-  greatText: {fileID: 0}
-  goodText: {fileID: 0}
-  poorText: {fileID: 0}
-  missText: {fileID: 0}
-  scoreText: {fileID: 0}
+  perfectText: {fileID: 1754624785}
+  greatText: {fileID: 279099637}
+  goodText: {fileID: 1382217745}
+  poorText: {fileID: 1889342724}
+  missText: {fileID: 494708327}
+  scoreText: {fileID: 1212242033}
 --- !u!1 &1020251492
 GameObject:
   m_ObjectHideFlags: 0
