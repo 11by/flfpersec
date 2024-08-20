@@ -29,7 +29,8 @@ public class PlatformManager : MonoBehaviour
 
         for (int i = 0; i < numberOfBeats; i++)
         {
-            if (platformPattern[i])
+            // 플랫폼 패턴 배열의 범위를 초과하지 않도록 조건 추가
+            if (i < platformPattern.Length && platformPattern[i])
             {
                 Vector3 position;
 
