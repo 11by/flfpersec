@@ -11,6 +11,7 @@ public class EnemyManager : MonoBehaviour
     public EnemyType[] enemyPattern; // 적이 나타날 박자 패턴 (적의 종류와 y좌표)
     public float jumpHeight; // 점프 높이
     public Transform player;
+    public float positionOffset = 0.0f; // 추가: 적 위치 오프셋
 
     private float beatInterval;
     private int numberOfBeats;
@@ -34,7 +35,9 @@ public class EnemyManager : MonoBehaviour
             if (enemyPattern[i] != null && enemyPattern[i].spawn)
             {
                 float yPos = -2 + (enemyPattern[i].yPosition * jumpHeight);
-                Vector3 position = new Vector3(player.position.x + i * beatInterval * scrollSpeed, yPos, 0);
+
+                // 오프셋 적용
+                Vector3 position = new Vector3(player.position.x + i * beatInterval * scrollSpeed + positionOffset, yPos, 0);
 
                 GameObject enemy = enemySpawner.SpawnEnemy(position, enemyPattern[i].type);
                 ApplyAnimationToEnemy(enemy, yPos);

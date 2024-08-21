@@ -12,6 +12,7 @@ public class PlatformManager : MonoBehaviour
     public bool[] platformPattern;
     public ProgressBarController progressBarController;
     public Transform player;
+    public float positionOffset = 0.0f; // 추가: 발판 위치 오프셋
 
     private float beatInterval;
     private int numberOfBeats;
@@ -36,12 +37,13 @@ public class PlatformManager : MonoBehaviour
 
                 if (platformCount == 0)
                 {
-                    // 첫 번째 발판의 위치를 플레이어의 중앙에 맞추기
-                    position = new Vector3(player.position.x, -4, 0);
+                    // 첫 번째 발판의 위치를 플레이어의 중앙에 맞추기 + 오프셋 적용
+                    position = new Vector3(player.position.x + positionOffset, -4, 0);
                 }
                 else
                 {
-                    position = new Vector3(player.position.x + i * beatInterval * scrollSpeed, -4, 0);
+                    // 이후 발판의 위치를 계산 + 오프셋 적용
+                    position = new Vector3(player.position.x + i * beatInterval * scrollSpeed + positionOffset, -4, 0);
                 }
 
                 GameObject platform = platformSpawner.SpawnPlatform(position);

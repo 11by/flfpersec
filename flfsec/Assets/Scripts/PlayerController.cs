@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
     private Coroutine currentJumpRoutine; // 현재 진행 중인 점프 코루틴
     private Pause pause; // Pause 스크립트 참조
     private float timeSlowFactor = 0.05f; // 시간 감속 비율
-    private MusicController musiccontroller;
+    private MusicController musicController;
 
     void Start()
     {
@@ -41,6 +41,19 @@ public class PlayerController : MonoBehaviour
         dustParticle.Stop();
         pause = FindObjectOfType<Pause>(); // Pause 스크립트 참조
         DeathUI.SetActive(false);
+        musicController = FindObjectOfType<MusicController>();
+
+        if (musicController != null)
+        {
+            musicController.ResumeMusic();
+            musicController.StopMusic();
+            musicController.StartMusic();
+        }
+        else
+        {
+            musicController.ResumeMusic();
+            musicController.StartMusic();
+        }
     }
 
     void Update()
@@ -112,14 +125,15 @@ public class PlayerController : MonoBehaviour
         isDie = true;
         animator.Play("Die");
 
+        if (musicController != null)
+        {
+            musicController.StopMusic();
+        }
+
         // 플랫폼 스크롤 서서히 멈추기
         StartCoroutine(SlowDownPlatformScrolling());
 
         StartCoroutine(SlowDownTimeAndShowDeathUI());
-        if (musiccontroller != null)
-        {
-            musiccontroller.StopMusic();
-        }
     }
 
     IEnumerator SlowDownPlatformScrolling()

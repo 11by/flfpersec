@@ -6,31 +6,59 @@ public class MusicController : MonoBehaviour
 {
     public string musicEventPath;
     private EventInstance musicInstance;
+    private bool isMusicPlaying;
 
     void Start()
     {
+        if (musicInstance.isValid())
+        {
+            musicInstance.release();
+        }
+
         musicInstance = RuntimeManager.CreateInstance(musicEventPath);
-        musicInstance.start();
+        StartMusic();
+    }
+
+    public void StartMusic()
+    {
+        if (!isMusicPlaying)
+        {
+            musicInstance.start();
+            isMusicPlaying = true;
+        }
     }
 
     public void PauseMusic()
     {
-        musicInstance.setPaused(true);
+        if (isMusicPlaying)
+        {
+            musicInstance.setPaused(true);
+        }
     }
 
     public void ResumeMusic()
     {
-        musicInstance.setPaused(false);
+        if (isMusicPlaying)
+        {
+            musicInstance.setPaused(false);
+        }
     }
 
-    public void StopMusic() // 명확한 이름의 메서드 추가
+    public void StopMusic()
     {
-        musicInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-        musicInstance.release();
+        if (isMusicPlaying)
+        {
+            musicInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+            isMusicPlaying = false;
+        }
     }
 
     public void OnDestroy()
     {
         StopMusic(); // OnDestroy에서 StopMusic을 호출
+        if (musicInstance.isValid())
+        {
+            musicInstance.release();
+        }
     }
 }
